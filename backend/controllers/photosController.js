@@ -120,22 +120,29 @@ async function create(req, res, next)
  */
 async function show(req, res, next)
 {
-	const { slug } = req.params;
-	const photo = await prisma.photo.findUnique({
-		where: { slug: slug },
-		include: {
-			category: true,
-			tags: true,
-		},
-	});
-
-	if (!photo)
+	const { id } = req.params;
+	try
 	{
-		next(new NotFound(`photo with slug ${slug} not found`));
-	}
+		const photo = await prisma.photo.findUnique({
+			where: { id: parseInt(id) },
+			include: {
+				User: true,
+				categories: true,
+			},
+		});
 
-	res.json(photo);
+		if (!photo)
+		{
+			return next(new NotFound(`Foto con ID ${id} non trovata`));
+		}
+
+		res.json(photo);
+	} catch (error)
+	{
+		next(error);
+	}
 }
+
 
 
 
@@ -150,84 +157,50 @@ async function update(req, res, next)
 	const validation = validationResult(req);
 	if (!validation.isEmpty())
 	{
-		return next(new validationError("Controllare i dati inseriti", validation.array()));
+		return next(new ValidationError("Controllare i dati inseriti", validation.array()));
 	}
 
-	const { slug } = req.params;
+	const { id } = req.params;
 	let updateData = {};
 
-	const article = await prisma.photo.findUnique({
-		where: { slug },
-		include: {
-			category: true,
-			tags: true,
-		},
+	const photo = await prisma.photo.findUnique({
+		where: { id: parseInt(id) },
 	});
 
-	if (!article)
+	if (!photo)
 	{
-		return next(new NotFound(`photo not found with slug: ${slug}`));
+		return next(new NotFound(`Foto non trovata con ID: ${id}`));
 	}
 
-	// Gestisci i campi di testo da FormData
+	// Aggiorna i campi di testo da FormData
 	if (req.body.title)
 	{
 		updateData.title = req.body.title;
-		updateData.slug = await generateSlug(req.body.title);
 	}
 
-	if (req.body.author)
+	if (req.body.description)
 	{
-		updateData.author = req.body.author;
+		updateData.description = req.body.description;
 	}
 
-	if (req.body.content)
+	if (req.body.visible)
 	{
-		updateData.content = req.body.content;
+		updateData.visible = req.body.visible === 'true';
 	}
 
-	if (req.body.published)
-	{
-		updateData.published = req.body.published === 'true';
-	}
-
-	if (req.body.categoryId)
-	{
-		updateData.categoryId = parseInt(req.body.categoryId);
-	}
-
-	// Gestisci i tag
-	if (req.body.tags)
-	{
-		const tagIds = req.body.tags.map(id => parseInt(id));
-		const existingTagIds = article.tags.map(tag => tag.id);
-		const tagsToDisconnect = existingTagIds.filter(id => !tagIds.includes(id));
-		const tagsToConnect = tagIds.filter(id => !existingTagIds.includes(id));
-
-		updateData.tags = {
-			disconnect: tagsToDisconnect.map(id => ({ id })),
-			connect: tagsToConnect.map(id => ({ id })),
-		};
-	}
-
-	// Gestisci l'immagine
+	// Aggiorna l'immagine
 	if (req.file)
 	{
-		if (article.image)
+		// Rimuovi l'immagine esistente se presente
+		if (photo.image)
 		{
-			try
+			fs.unlink(photo.image, (error) =>
 			{
-				fs.unlink(article.image, (error) =>
+				if (error)
 				{
-					if (error)
-					{
-						console.log("Errore nella rimozione dell'immagine esistente:", error);
-					}
-				});
-			} catch (error)
-			{
-				console.log("Errore nella rimozione dell'immagine esistente:", error);
-			}
+					console.log("Errore nella rimozione dell'immagine esistente:", error);
+				}
+			});
 		}
 		updateData.image = req.file.path;
 	}
@@ -235,22 +208,23 @@ async function update(req, res, next)
 	// Esegui l'aggiornamento
 	try
 	{
-		const updatedphoto = await prisma.photo.update({
-			where: { slug },
+		const updatedPhoto = await prisma.photo.update({
+			where: { id: parseInt(id) },
 			data: updateData,
 			include: {
-				category: true,
-				tags: true,
+				User: true,
+				categories: true,
 			},
 		});
 
-		res.json(updatedphoto);
+		res.json(updatedPhoto);
 	} catch (error)
 	{
 		console.error(error);
-		res.status(500).send("Errore durante l'aggiornamento dell'articolo");
+		res.status(500).send("Errore durante l'aggiornamento della foto");
 	}
 }
+
 
 
 
