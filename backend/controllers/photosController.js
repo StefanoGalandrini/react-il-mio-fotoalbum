@@ -229,7 +229,6 @@ async function update(req, res, next)
 
 
 
-
 // delete - delete a single photo by slug
 /**
  * 
@@ -238,33 +237,43 @@ async function update(req, res, next)
  */
 async function destroy(req, res, next)
 {
-	const { slug } = req.params;
-	const photo = await prisma.photo.findUnique({
-		where: { slug },
-	});
-
-	if (!photo)
+	const { id } = req.params;
+	try
 	{
-		return next(new NotFound(`photo not found with slug: ${slug}`));
-	}
-
-	if (photo.image)
-	{
-		fs.unlink(photo.image, (error) =>
-		{
-			if (error)
-			{
-				console.log("Errore nella rimozione dell'immagine esistente:", error);
-			}
+		const photo = await prisma.photo.findUnique({
+			where: { id: parseInt(id) },
 		});
+
+		if (!photo)
+		{
+			return next(new NotFound(`Foto non trovata con ID: ${id}`));
+		}
+
+		// Rimuovi l'immagine dal filesystem, se presente
+		if (photo.image)
+		{
+			fs.unlink(photo.image, (error) =>
+			{
+				if (error)
+				{
+					console.log("Errore nella rimozione dell'immagine esistente:", error);
+				}
+			});
+		}
+
+		// Elimina la foto dal database
+		await prisma.photo.delete({
+			where: { id: parseInt(id) }
+		});
+
+		res.json({ message: "Foto eliminata con successo" });
+	} catch (error)
+	{
+		console.error(error);
+		res.status(500).send("Errore durante l'eliminazione della foto");
 	}
-
-	await prisma.photo.delete({
-		where: { slug }
-	});
-
-	res.json({ message: "photo successfully deleted" });
 }
+
 
 
 
