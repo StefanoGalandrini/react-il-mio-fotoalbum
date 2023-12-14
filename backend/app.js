@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const cors = require("cors");
 
 // remove favicon requests
@@ -14,7 +14,7 @@ app.use((req, res, next) =>
 	}
 	next();
 });
-
+console.log(process.env.CORS_ORIGIN);
 // import errors middleware
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/error404");
