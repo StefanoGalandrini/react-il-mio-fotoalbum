@@ -5,7 +5,7 @@ CREATE TABLE `Photo` (
     `description` TEXT NULL,
     `image` TEXT NOT NULL,
     `visible` BOOLEAN NOT NULL DEFAULT true,
-    `userId` INTEGER NOT NULL,
+    `userId` INTEGER NOT NULL DEFAULT 1,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 

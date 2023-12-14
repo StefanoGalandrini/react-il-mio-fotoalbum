@@ -1,0 +1,9 @@
+[
+	{
+		"firstName": "Stefano",
+		"lastName": "Galandrini",
+		"email": "stefano@email.it",
+		"password": "Stefano00!",
+		"role": "admin"
+	}
+]

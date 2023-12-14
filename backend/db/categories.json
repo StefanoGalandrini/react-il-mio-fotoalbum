@@ -1,0 +1,34 @@
+[
+	{
+		"id": 1,
+		"name": "Paesaggi"
+	},
+	{
+		"id": 2,
+		"name": "Ritratti"
+	},
+	{
+		"id": 3,
+		"name": "Natura"
+	},
+	{
+		"id": 4,
+		"name": "Architettura"
+	},
+	{
+		"id": 5,
+		"name": "Eventi"
+	},
+	{
+		"id": 6,
+		"name": "Sport"
+	},
+	{
+		"id": 7,
+		"name": "Viaggi"
+	},
+	{
+		"id": 8,
+		"name": "Cibo"
+	}
+]
