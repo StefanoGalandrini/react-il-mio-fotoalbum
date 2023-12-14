@@ -9,3 +9,44 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Photo {
+  id          Int        @id @default(autoincrement())
+  title       String     @db.VarChar(100)
+  description String?    @db.Text
+  image       String     @db.Text
+  visible     Boolean    @default(true)
+  userId      Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  categories  Category[]
+  User        User       @relation(fields: [userId], references: [id])
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  photo     Photo[]
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String   @unique
+  password  String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  photo     Photo[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
