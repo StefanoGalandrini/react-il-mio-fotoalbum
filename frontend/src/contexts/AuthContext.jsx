@@ -24,7 +24,6 @@ export function AuthProvider({children}) {
 		storeToken(null);
 		setIsLogged(false);
 		localStorage.removeItem("token");
-
 		setTimeout(() => {
 			navigate("/");
 		});
@@ -41,7 +40,6 @@ export function AuthProvider({children}) {
 			handleLogout();
 			return;
 		}
-
 		try {
 			const response = await fetchApi("/verify-token", "POST", {
 				token: storedToken,

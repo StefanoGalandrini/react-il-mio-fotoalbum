@@ -1,6 +1,5 @@
 async function fetchApi(path, method = "GET", body = null)
 {
-	console.log(import.meta.env.VITE_API_URL + path);
 	try
 	{
 		const resp = await fetch(import.meta.env.VITE_API_URL + path, {
@@ -13,16 +12,13 @@ async function fetchApi(path, method = "GET", body = null)
 		});
 
 		const data = await resp.json();
-
 		if (!resp.ok)
 		{
-
 			if (data.error === "TokenExpiredError" || data.error === "AuthError")
 			{
 				localStorage.removeItem("token");
 				window.location = "/login";
 			}
-			console.log(data);
 			throw new Error(data.error ?? "A causa di un errore non è possibile eseguire l'operazione richiesta.");
 		}
 
