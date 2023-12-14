@@ -38,6 +38,7 @@ app.use("/uploads", express.static("uploads"));
 app.use("/photos", require("./routers/photosRouter"));
 app.use("/categories", require("./routers/categoriesRouter"));
 app.use("", require("./routers/authRouter"));
+app.use("/messages", require("./routers/messagesRouter"));
 
 
 // import middleware
