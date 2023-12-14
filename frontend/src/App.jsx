@@ -15,8 +15,7 @@ function App() {
 						<Route element={<DefaultLayout />}>
 							<Route index path="/" element={<Home />} />
 							<Route path="/login" element={<Login />} />
-							{/* <Route path="/login" element={<Login />} />
-							<Route path="/register" element={<Register />} /> */}
+							{/* <Route path="/register" element={<Register />} /> */}
 							<Route element={<ProtectedRoute />}>
 								<Route path="/dashboard" element={<Dashboard />} />
 								{/* <Route path="/blog" element={<Blog />} />
