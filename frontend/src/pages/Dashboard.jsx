@@ -1,30 +1,44 @@
-import Navbar from "../components/Navbar.jsx";
-import {useAuth} from "../contexts/AuthContext.jsx";
+import Navbar from "../components/Navbar";
+import {useState, useEffect} from "react";
+import {useSearch} from "../contexts/SearchContext";
+import PhotoCard from "../components/PhotoCard";
+import Sidebar from "../components/Sidebar";
+import fetchApi from "../utilities/fetchApi";
 
 function Dashboard() {
-	const auth = useAuth();
-	const user = auth.user;
-	console.log(user);
+	const [photos, setPhotos] = useState([]);
+	const {search} = useSearch();
+
+	// Funzione asincrona per recuperare le foto
+	async function fetchPhotos() {
+		try {
+			const data = await fetchApi("/photos", "GET");
+			setPhotos(data);
+		} catch (error) {
+			console.error("Errore nel recupero delle foto:", error);
+		}
+	}
+
+	useEffect(() => {
+		fetchPhotos();
+	}, []);
+
+	const filteredPhotos = photos.filter((photo) =>
+		photo.title.toLowerCase().includes(search.toLowerCase()),
+	);
 
 	return (
-		<div className="flex flex-col justify-center items-center text-gray-800 bg-fixed bg-cover bg-center h-screen bg-[url('/background.jpg')]">
-			<div className="overflow-auto h-[85vh]">
-				<h1 className="mt-20 uppercase text-2xl">DASHBOARD</h1>
-				<div className="mt-5 text-2xl text-fuchsia-600">
-					<p>
-						Benvenuto,
-						{user.firstName} {user.lastName}
-					</p>
-					<ul>
-						<li>vedere tutte le foto inserite (filtrabili)</li>
-						<li>vedere i dettagli di una singola foto</li>
-						<li>aggiungerne di nuove (con validazione)</li>
-						<li>modificarle (con validazione)</li>
-						<li>cancellarle</li>
-					</ul>
+		<>
+			<Sidebar />
+			<div className="h-[90vh] w-[85vw] flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
+				<h1 className="my-5 uppercase text-3xl">le nostre foto</h1>
+				<div className="container flex justify-start items-start gap-5">
+					{filteredPhotos.map((photo) => (
+						<PhotoCard key={photo.id} photo={photo} showAll={true} />
+					))}
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

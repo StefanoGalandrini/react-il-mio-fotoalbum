@@ -34,7 +34,7 @@ function Home() {
 				<h1 className="my-5 uppercase text-3xl">le nostre foto</h1>
 				<div className="container flex justify-start items-start gap-5">
 					{filteredPhotos.map((photo) => (
-						<PhotoCard key={photo.id} photo={photo} />
+						<PhotoCard key={photo.id} photo={photo} showAll={false} />
 					))}
 				</div>
 			</div>

@@ -36,14 +36,15 @@ function Sidebar() {
 		<div className="fixed top-[10vh] h-screen right-0 w-[15vw] bg-gray-400 p-4 shadow">
 			{user && user.role === "admin" ? (
 				// Menu per Admin
-				<div>
-					<p className="font-bold text-lg mb-4">Gestione Categorie</p>
-					<NavbarLink href="/categories" className="block mb-2">
-						Elenco Categorie
+				<div className="flex flex-col">
+					<p className="font-bold text-lg text-center mb-4">
+						Gestione Categorie
+					</p>
+					<NavbarLink
+						href="/categories-manage"
+						className="block mb-2 text-left">
+						Gestione Categorie
 					</NavbarLink>
-					<NavLink to="/categories/create" className="block mb-2">
-						Aggiungi Categoria
-					</NavLink>
 				</div>
 			) : (
 				// Form per Messaggi

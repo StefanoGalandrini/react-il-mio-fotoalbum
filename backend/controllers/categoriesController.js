@@ -33,8 +33,28 @@ async function store(req, res)
 }
 
 
+// delete - delete a category
+async function destroy(req, res)
+{
+	const { id } = req.params;
+	try
+	{
+		await prisma.category.delete({
+			where: { id: parseInt(id) }
+		});
+
+		res.json({ message: "Categoria eliminata con successo" });
+	} catch (error)
+	{
+		console.error("Errore durante l'eliminazione della categoria:", error);
+		res.status(500).json({ error: "Errore durante l'eliminazione della categoria" });
+	}
+}
+
+
 
 module.exports = {
 	index,
 	store,
+	destroy,
 };

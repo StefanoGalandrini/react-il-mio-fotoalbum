@@ -64,6 +64,10 @@ async function index(req, res, next)
 }
 
 
+
+
+
+
 // create - add a new photo to db
 /**
  * 
@@ -79,8 +83,6 @@ async function create(req, res, next)
 	}
 	try
 	{
-		console.log("req.body:", req.body, "req.file:", req.file);
-
 		const { title, description, visible, userId, categories } = req.body;
 		const imagePath = req.file ? req.file.path : null;
 

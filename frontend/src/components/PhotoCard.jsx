@@ -1,12 +1,12 @@
-function Card({photo}) {
-	if (!photo.visible) {
+function Card({photo, showAll}) {
+	if (!showAll && !photo.visible) {
 		return null;
 	}
-	const imageUrl = `http://localhost:3000/${photo.image.replace(/\\/g, "/")}`;
-
+	const imageUrl =
+		import.meta.env.VITE_API_URL + "/" + photo.image.replace(/\\/g, "/");
 	return (
 		<div className="card transition transform hover:scale-105 duration-300">
-			<div className="bg-gray-100 h-full flex-1 rounded-lg overflow-hidden shadow-md shadow-slate-800 border-2 border-teal-800">
+			<div className="bg-gray-100 flex-1 rounded-lg overflow-hidden shadow-md shadow-slate-800 border-2 border-teal-800">
 				<img src={imageUrl} alt={photo.title} className="w-full" />
 				<div className="p-4">
 					<h5 className="text-xl text-center mb-3 font-bold text-teal-800">
