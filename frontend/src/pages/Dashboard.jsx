@@ -1,40 +1,29 @@
 import Navbar from "../components/Navbar";
-import {useState, useEffect} from "react";
+import {useEffect} from "react";
 import {useSearch} from "../contexts/SearchContext";
 import PhotoCard from "../components/PhotoCard";
 import Sidebar from "../components/Sidebar";
-import fetchApi from "../utilities/fetchApi";
 
 function Dashboard() {
-	const [photos, setPhotos] = useState([]);
-	const {search} = useSearch();
-
-	// Funzione asincrona per recuperare le foto
-	async function fetchPhotos() {
-		try {
-			const data = await fetchApi("/photos", "GET");
-			setPhotos(data);
-		} catch (error) {
-			console.error("Errore nel recupero delle foto:", error);
-		}
-	}
+	const {photos, fetchFilteredPhotos} = useSearch();
 
 	useEffect(() => {
-		fetchPhotos();
+		fetchFilteredPhotos("");
 	}, []);
 
-	const filteredPhotos = photos.filter((photo) =>
-		photo.title.toLowerCase().includes(search.toLowerCase()),
-	);
+	const handleSearchSubmit = (searchTerm) => {
+		fetchFilteredPhotos(searchTerm);
+	};
 
 	return (
 		<>
 			<Sidebar />
-			<div className="h-[90vh] w-[85vw] flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
+			<div className="h-[90vh] w-PhotoCard[85vw] flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
 				<h1 className="my-5 uppercase text-3xl">le nostre foto</h1>
-				<div className="container flex justify-start items-start gap-5">
-					{filteredPhotos.map((photo) => (
-						<PhotoCard key={photo.id} photo={photo} showAll={true} />
+
+				<div className="container flex flex-wrap justify-start items-stretch gap-5">
+					{photos.map((photo) => (
+						<PhotoCard key={photo.id} photo={photo} />
 					))}
 				</div>
 			</div>

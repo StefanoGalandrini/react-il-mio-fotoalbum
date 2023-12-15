@@ -1,6 +1,8 @@
+import {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAuth} from "../contexts/AuthContext";
 import {useSearch} from "../contexts/SearchContext";
+import {useSearchGuest} from "../contexts/SearchContextGuest";
 
 function NavbarLink({href, children}) {
 	return (
@@ -14,11 +16,22 @@ function NavbarLink({href, children}) {
 
 function Navbar() {
 	const {isLogged, handleLogout, user} = useAuth();
-	const {search, setSearch} = useSearch();
+	const {fetchFilteredPhotos: fetchFilteredAdmin} = useSearch();
+	const {fetchFilteredPhotos: fetchFilteredGuest} = useSearchGuest();
+	const [search, setSearch] = useState("");
 	const navigate = useNavigate();
 
 	function handleSearchChange(event) {
 		setSearch(event.target.value);
+	}
+
+	function handleSubmit(event) {
+		event.preventDefault();
+		if (isLogged) {
+			fetchFilteredAdmin(search);
+		} else {
+			fetchFilteredGuest(search);
+		}
 	}
 
 	function logout() {
@@ -59,13 +72,16 @@ function Navbar() {
 							</li>
 
 							<li className="flex items-center">
-								<input
-									type="text"
-									placeholder="Cerca per titolo..."
-									value={search}
-									onChange={handleSearchChange}
-									className="border rounded py-1 px-2 focus:outline-none focus:border-teal-800 focus:border-2"
-								/>
+								<form onSubmit={handleSubmit}>
+									<input
+										type="text"
+										placeholder="Cerca per titolo..."
+										value={search}
+										onChange={handleSearchChange}
+										className="border rounded py-1 px-2 focus:outline-none focus:border-teal-800 focus:border-2"
+									/>
+									<button type="submit">Cerca</button>
+								</form>
 							</li>
 							{isLogged && user?.role === "admin" && (
 								<li>

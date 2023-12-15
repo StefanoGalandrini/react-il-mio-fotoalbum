@@ -1,0 +1,92 @@
+[
+	{
+		"id": 1,
+		"title": "Spiaggia e fiume",
+		"description": "Una spiaggia attraversata da un fiume che sfocia nel mare",
+		"image": "/images/01.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 3}]
+	},
+	{
+		"id": 2,
+		"title": "Spiaggia al mattino",
+		"description": "Una splendida spiaggia bianca con alberi e mare cristallino",
+		"image": "/images/02.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 3}]
+	},
+	{
+		"id": 3,
+		"title": "Strada di campagna",
+		"description": "Una strada nel verde della campagna con alberi sullo sfondo",
+		"image": "/images/03.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 3}, {"id": 7}]
+	},
+	{
+		"id": 4,
+		"title": "Montagne innevate",
+		"description": "Rocce e cime innevate con cielo azzurro e nuvole bianche",
+		"image": "/images/04.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 3}]
+	},
+	{
+		"id": 5,
+		"title": "Bar ristorante",
+		"description": "tavoli di un bar ristorante con tazzine di caffè e persone sullo sfondo",
+		"image": "/images/05.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 2}, {"id": 8}]
+	},
+	{
+		"id": 6,
+		"title": "Case di paese",
+		"description": "Case bianche tipiche di un piccolo paese della Grecia",
+		"image": "/images/06.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 4}, {"id": 7}]
+	},
+	{
+		"id": 7,
+		"title": "Ponte sospeso",
+		"description": "Immagine notturna di un ponte moderno sorretto da funi e pilastri",
+		"image": "/images/07.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 4}, {"id": 7}]
+	},
+	{
+		"id": 8,
+		"title": "Colazione al bar",
+		"description": "Tazza di cappuccino con decorazione di panna e cacao",
+		"image": "/images/08.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 2}, {"id": 8}]
+	},
+	{
+		"id": 9,
+		"title": "Persona sola",
+		"description": "Una donna con cappuccio sulla testa cammina sulla riva del mare in una giornata fredda e piovosa",
+		"image": "/images/09.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 2}, {"id": 3}, {"id": 7}]
+	},
+	{
+		"id": 10,
+		"title": "Pale a vento",
+		"description": "Una strada nel deserto e pale a vento sullo sfondo",
+		"image": "/images/10.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 1}, {"id": 4}]
+	}
+]

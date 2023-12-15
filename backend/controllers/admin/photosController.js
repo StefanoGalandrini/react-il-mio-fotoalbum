@@ -6,8 +6,8 @@ const util = require("util");
 
 
 // errors handler
-const NotFound = require("../errors/NotFound");
-const validationError = require("../errors/ValidationError");
+const NotFound = require("../../errors/NotFound");
+const validationError = require("../../errors/ValidationError");
 const { validationResult } = require("express-validator");
 
 
@@ -19,49 +19,32 @@ const { validationResult } = require("express-validator");
  */
 async function index(req, res, next)
 {
+	const title = req.query.title;
+
+	const dbQuery = {};
+
+	if (title)
+	{
+		dbQuery.title = { contains: title };
+	}
+
 	try
 	{
-		const isAdmin = req.user && req.user.role === 'admin';
-		const { visible, string } = req.query;
-		let queryOptions = {};
-		if (!isAdmin)
-		{
-			queryOptions.where = { visible: true };
-		}
-
-		if (string)
-		{
-			queryOptions.where = {
-				...queryOptions.where,
-				OR: [
-					{
-						title: {
-							contains: string,
-						}
-					},
-					{
-						description: {
-							contains: string,
-						}
-					},
-				],
-			};
-		}
-
 		const photos = await prisma.photo.findMany({
-			...queryOptions,
+			where: dbQuery,
 			include: {
-				User: true,
 				categories: true,
+				User: true,
 			},
 		});
 		res.json(photos);
 	} catch (error)
 	{
 		console.error("Errore nel metodo index:", error);
-		next(error);
+		res.status(500).json({ error: "Errore durante la ricerca delle immagini" });
 	}
 }
+
 
 
 

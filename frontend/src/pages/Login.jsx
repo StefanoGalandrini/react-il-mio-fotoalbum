@@ -67,12 +67,6 @@ export default function Login() {
 						type="submit">
 						Login
 					</button>
-					{/* <button
-						onClick={() => navigate("/register")}
-						className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-						type="submit">
-						Register
-					</button> */}
 				</div>
 			</form>
 		</div>

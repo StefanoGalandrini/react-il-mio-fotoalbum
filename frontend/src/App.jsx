@@ -1,5 +1,6 @@
 import {AuthProvider} from "./contexts/AuthContext";
 import {SearchProvider} from "./contexts/SearchContext";
+import {SearchProviderGuest} from "./contexts/SearchContextGuest";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import ProtectedRoute from "./middleware/AdminRoute";
 import DefaultLayout from "./pages/DefaultLayout";
@@ -7,33 +8,35 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CategoriesManage from "./pages/CategoriesManage";
+import Create from "./components/Create";
 
 function App() {
 	return (
-		<>
-			<BrowserRouter>
-				<AuthProvider>
-					<SearchProvider>
+		<BrowserRouter>
+			<AuthProvider>
+				<SearchProvider>
+					<SearchProviderGuest>
 						<Routes>
-							<Route element={<DefaultLayout />}>
-								<Route index path="/" element={<Home />} />
-								<Route path="/login" element={<Login />} />
-								{/* <Route path="/register" element={<Register />} /> */}
+							<Route path="/" element={<DefaultLayout />}>
+								<Route index element={<Home />} />
+								<Route path="login" element={<Login />} />
+
+								{/* Rotte protette */}
 								<Route element={<ProtectedRoute />}>
-									<Route path="/dashboard" element={<Dashboard />} />
+									<Route path="dashboard" element={<Dashboard />} />
 									<Route
-										path="/categories-manage"
+										path="categories-manage"
 										element={<CategoriesManage />}
 									/>
-									{/* <Route path="/create" element={<Blog />} />
-								<Route path="/blog/:slug" element={<Show />} /> */}
+									<Route path="create" element={<Create />} />
+									{/* <Route path="blog/:slug" element={<Show />} /> */}
 								</Route>
 							</Route>
 						</Routes>
-					</SearchProvider>
-				</AuthProvider>
-			</BrowserRouter>
-		</>
+					</SearchProviderGuest>
+				</SearchProvider>
+			</AuthProvider>
+		</BrowserRouter>
 	);
 }
 

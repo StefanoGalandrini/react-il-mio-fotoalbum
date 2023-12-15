@@ -12,7 +12,7 @@ function CategoriesManage() {
 
 	async function fetchCategories() {
 		try {
-			const data = await fetchApi("/categories", "GET");
+			const data = await fetchApi("/admin/categories", "GET");
 			setCategories(data);
 		} catch (error) {
 			console.error("Errore nel recupero delle categorie:", error);
@@ -22,7 +22,7 @@ function CategoriesManage() {
 	async function handleAddCategory(event) {
 		event.preventDefault();
 		try {
-			await fetchApi("/categories", "POST", {name: newCategoryName});
+			await fetchApi("/admin/categories", "POST", {name: newCategoryName});
 			setNewCategoryName("");
 			fetchCategories();
 		} catch (error) {
@@ -32,7 +32,7 @@ function CategoriesManage() {
 
 	async function handleDeleteCategory(categoryId) {
 		try {
-			await fetchApi(`/categories/${categoryId}`, "DELETE");
+			await fetchApi(`/admin/categories/${categoryId}`, "DELETE");
 			fetchCategories();
 		} catch (error) {
 			console.error("Errore durante l'eliminazione della categoria", error);
@@ -54,7 +54,7 @@ function CategoriesManage() {
 								{categories.map((category) => (
 									<li
 										key={category.id}
-										className="flex justify-between items-center mb-2">
+										className="flex justify-between items-center mb-2 border-b-2 border-slate-400 pb-2">
 										<span className="mr-2">{category.name}</span>
 										<button
 											onClick={() => handleDeleteCategory(category.id)}
@@ -81,7 +81,7 @@ function CategoriesManage() {
 								/>
 								<button
 									type="submit"
-									className="bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+									className="w-fit px-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
 									Aggiungi
 								</button>
 							</form>

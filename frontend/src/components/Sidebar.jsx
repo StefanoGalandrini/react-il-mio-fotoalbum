@@ -6,19 +6,24 @@ import fetchApi from "../utilities/fetchApi";
 function Sidebar() {
 	const {user} = useAuth();
 	const [formData, setFormData] = useState({email: "", message: ""});
+	const [feedback, setFeedback] = useState(null);
+	const [isSuccess, setIsSuccess] = useState(true);
 
 	function handleInputChange(event) {
 		setFormData({...formData, [event.target.name]: event.target.value});
+		setFeedback(null);
 	}
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		try {
 			const response = await fetchApi("/messages", "POST", formData);
-			console.log(response);
 			setFormData({email: "", message: ""});
+			setFeedback("Il messaggio è stato inviato con successo");
+			setIsSuccess(true);
 		} catch (error) {
-			console.error("Errore durante l'invio del messaggio", error);
+			setFeedback("Errore durante l'invio del messaggio");
+			setIsSuccess(false);
 		}
 	}
 
@@ -33,7 +38,7 @@ function Sidebar() {
 	}
 
 	return (
-		<div className="fixed top-[10vh] h-screen right-0 w-[15vw] bg-gray-400 p-4 shadow">
+		<div className="fixed top-[10vh] h-screen right-0 w-[15vw] bg-stone-400 p-4 shadow text-fuchsia-900">
 			{user && user.role === "admin" ? (
 				// Menu per Admin
 				<div className="flex flex-col">
@@ -61,7 +66,7 @@ function Sidebar() {
 							value={formData.email}
 							onChange={handleInputChange}
 							placeholder="La tua email"
-							className="w-full p-2"
+							className="w-full p-2 text-gray-700"
 						/>
 						<label htmlFor="message" className="mt-4">
 							Messaggio
@@ -72,15 +77,23 @@ function Sidebar() {
 							value={formData.message}
 							onChange={handleInputChange}
 							placeholder="Il tuo messaggio"
-							className="mb-2 w-full p-2 h-28"></textarea>
+							className="mb-2 w-full p-2 h-28 text-gray-700"></textarea>
 						<div className="flex justify-center">
 							<button
 								type="submit"
-								className="w-fit px-4 py-2 bg-teal-800 rounded-md text-slate-300 mt-3 transition duration-150 hover:bg-teal-700 hover:text-white">
+								className="w-fit px-4 py-2 bg-fuchsia-800 rounded-md text-gray-300 mt-3 transition duration-150 hover:bg-fuchsia-600 hover:text-white">
 								Invia
 							</button>
 						</div>
 					</form>
+					{feedback && (
+						<div
+							className={`text-center font-bold p-2 border-2 bg-slate-50 rounded-lg mt-5 ${
+								isSuccess ? "text-green-800" : "text-red-700"
+							}`}>
+							{feedback}
+						</div>
+					)}
 				</div>
 			)}
 		</div>

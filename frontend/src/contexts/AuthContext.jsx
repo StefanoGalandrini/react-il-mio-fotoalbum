@@ -9,7 +9,7 @@ export function AuthProvider({children}) {
 	const [token, setToken] = useState(
 		() => localStorage.getItem("token") ?? null,
 	);
-	const [isLogged, setIsLogged] = useState(null);
+	const [isLogged, setIsLogged] = useState(false);
 	const [initComplete, setInitComplete] = useState(false);
 	const navigate = useNavigate();
 

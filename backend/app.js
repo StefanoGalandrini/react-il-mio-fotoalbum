@@ -14,7 +14,7 @@ app.use((req, res, next) =>
 	}
 	next();
 });
-console.log(process.env.CORS_ORIGIN);
+
 // import errors middleware
 const errorHandler = require("./middleware/errorHandler");
 const notFound = require("./middleware/error404");
@@ -35,10 +35,12 @@ app.use(express.json());
 app.use("/uploads", express.static("uploads"));
 
 // import routers
-app.use("/photos", require("./routers/photosRouter"));
-app.use("/categories", require("./routers/categoriesRouter"));
-app.use("", require("./routers/authRouter"));
-app.use("/messages", require("./routers/messagesRouter"));
+app.use("/admin/photos", require("./routers/admin/photosRouter"));
+app.use("/admin/categories", require("./routers/admin/categoriesRouter"));
+app.use("/admin/auth", require("./routers/admin/authRouter"));
+app.use("/guests/photos", require("./routers/guests/photosRouter"));
+app.use("/", require("./routers/authRouter"));
+app.use("/messages", require("./routers/guests/messagesRouter"));
 
 
 // import middleware
