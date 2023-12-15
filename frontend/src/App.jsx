@@ -5,6 +5,8 @@ import DefaultLayout from "./pages/DefaultLayout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import CategoriesList from "./components/CategoriesList";
+import CategoriesCreate from "./components/CategoriesCreate";
 
 function App() {
 	return (
@@ -18,7 +20,12 @@ function App() {
 							{/* <Route path="/register" element={<Register />} /> */}
 							<Route element={<ProtectedRoute />}>
 								<Route path="/dashboard" element={<Dashboard />} />
-								{/* <Route path="/blog" element={<Blog />} />
+								<Route path="/categories" element={<CategoriesList />} />
+								<Route
+									path="/categories/create"
+									element={<CategoriesCreate />}
+								/>
+								{/* <Route path="/create" element={<Blog />} />
 								<Route path="/blog/:slug" element={<Show />} /> */}
 							</Route>
 						</Route>
