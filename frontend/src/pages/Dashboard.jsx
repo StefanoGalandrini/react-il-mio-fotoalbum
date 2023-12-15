@@ -11,9 +11,9 @@ function Dashboard() {
 		fetchFilteredPhotos("");
 	}, []);
 
-	const handleSearchSubmit = (searchTerm) => {
-		fetchFilteredPhotos(searchTerm);
-	};
+	// const handleSearchSubmit = (searchTerm) => {
+	// 	fetchFilteredPhotos(searchTerm);
+	// };
 
 	return (
 		<>

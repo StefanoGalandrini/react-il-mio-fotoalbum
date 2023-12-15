@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const photosController = require("../../controllers/admin/photosController");
-const authHandler = require("../../middleware/authHandler");
 
 // Configurazione di Multer
 const multer = require("multer");
@@ -18,13 +17,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-const { body, checkSchema } = require("express-validator");
+const { checkSchema } = require("express-validator");
 
 const { checkValidity } = require("../../middleware/validator");
 const photosCreate = require("../../validations/photosCreate");
 const photosUpdate = require("../../validations/photosUpdate");
-
-// const authHandler = require("../middleware/authHandler");
+const authHandler = require("../../middleware/authHandler");
 const authRoleHandler = require("../../middleware/authRoleHandler");
 
 router.get("/",

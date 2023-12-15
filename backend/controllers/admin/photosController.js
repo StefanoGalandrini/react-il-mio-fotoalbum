@@ -59,16 +59,15 @@ async function index(req, res, next)
  */
 async function create(req, res, next)
 {
-	const validation = validationResult(req);
-	if (!validation.isEmpty())
-	{
-		return next(new validationError("Verificare i dati inseriti", validation.array()));
-	}
+	// const validation = validationResult(req);
+	// if (!validation.isEmpty())
+	// {
+	// 	return next(new validationError("Verificare i dati inseriti", validation.array()));
+	// }
 	try
 	{
 		const { title, description, visible, userId, categories } = req.body;
 		const imagePath = req.file ? req.file.path : null;
-
 		const userNumber = parseInt(userId);
 		const photo = await prisma.photo.create({
 			data: {
@@ -78,7 +77,7 @@ async function create(req, res, next)
 				image: imagePath,
 				userId: userNumber,
 				categories: {
-					connect: categories.map(catId => ({ id: parseInt(catId) })),
+					connect: categories.map(categoryId => ({ id: parseInt(categoryId) })),
 				},
 			},
 			include: {

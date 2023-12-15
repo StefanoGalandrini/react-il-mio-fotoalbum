@@ -8,7 +8,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CategoriesManage from "./pages/CategoriesManage";
-import Create from "./components/Create";
+import Create from "./pages/AddPhotoForm";
+import AddPhotoForm from "./pages/AddPhotoForm";
 
 function App() {
 	return (
@@ -29,7 +30,7 @@ function App() {
 										element={<CategoriesManage />}
 									/>
 									<Route path="create" element={<Create />} />
-									{/* <Route path="blog/:slug" element={<Show />} /> */}
+									<Route path="add-photo" element={<AddPhotoForm />} />
 								</Route>
 							</Route>
 						</Routes>

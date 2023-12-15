@@ -1,0 +1,126 @@
+import {useState, useEffect} from "react";
+import fetchApi from "../utilities/fetchApi";
+
+function AddPhotoForm() {
+	const [title, setTitle] = useState("");
+	const [description, setDescription] = useState("");
+	const [image, setImage] = useState(null);
+	const [imagePreview, setImagePreview] = useState(null); // Aggiungi lo stato per l'anteprima dell'immagine
+	const [visible, setVisible] = useState(true);
+	const [selectedCategories, setSelectedCategories] = useState([]);
+	const [categories, setCategories] = useState([]);
+
+	useEffect(() => {
+		async function fetchCategories() {
+			try {
+				const response = await fetchApi("/admin/categories", "GET");
+				setCategories(response);
+			} catch (error) {
+				console.error("Errore nel recupero delle categorie:", error);
+			}
+		}
+		fetchCategories();
+	}, []);
+
+	const handleImageChange = (event) => {
+		if (event.target.files.length > 0) {
+			const file = event.target.files[0];
+			setImage(file);
+			setImagePreview(URL.createObjectURL(file)); // Crea l'URL per l'anteprima
+		}
+	};
+
+	const handleCategoryChange = (event) => {
+		const categoryId = parseInt(event.target.value);
+		const isChecked = event.target.checked;
+		setSelectedCategories(
+			isChecked
+				? [...selectedCategories, categoryId]
+				: selectedCategories.filter((id) => id !== categoryId),
+		);
+	};
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+
+		const formData = new FormData();
+		formData.append("title", title);
+		formData.append("description", description);
+		formData.append("visible", visible);
+		if (image) {
+			formData.append("image", image);
+		}
+		selectedCategories.forEach((categoryId) => {
+			formData.append("categories", categoryId);
+		});
+
+		try {
+			console.log("formData", formData);
+			await fetchApi("/admin/photos", "POST", formData);
+			// Aggiungi logica per la gestione del successo
+		} catch (error) {
+			console.error("Errore durante l'invio della foto", error);
+			// Aggiungi logica per la gestione dell'errore
+		}
+	};
+
+	return (
+		<form onSubmit={handleSubmit}>
+			<h1>Aggiungi Nuova Foto</h1>
+			<label>
+				Titolo:
+				<input
+					type="text"
+					value={title}
+					onChange={(e) => setTitle(e.target.value)}
+				/>
+			</label>
+			<label>
+				Descrizione:
+				<textarea
+					value={description}
+					onChange={(e) => setDescription(e.target.value)}></textarea>
+			</label>
+			<label>
+				Immagine:
+				<input
+					type="file"
+					name="image"
+					id="image"
+					onChange={handleImageChange}
+				/>
+				{imagePreview && (
+					<img
+						src={imagePreview}
+						alt="Anteprima"
+						style={{width: "100px", height: "100px"}}
+					/>
+				)}
+			</label>
+			<label>
+				Visibile:
+				<input
+					type="checkbox"
+					checked={visible}
+					onChange={() => setVisible(!visible)}
+				/>
+			</label>
+			<div>
+				Categorie:
+				{categories.map((category) => (
+					<label key={category.id}>
+						{category.name}
+						<input
+							type="checkbox"
+							value={category.id}
+							onChange={handleCategoryChange}
+						/>
+					</label>
+				))}
+			</div>
+			<button type="submit">Invia</button>
+		</form>
+	);
+}
+
+export default AddPhotoForm;

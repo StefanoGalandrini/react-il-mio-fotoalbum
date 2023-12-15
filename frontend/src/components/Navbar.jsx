@@ -40,7 +40,7 @@ function Navbar() {
 	}
 
 	return (
-		<header className="sticky top-0 left-0 z-50 bg-white/80 backdrop-blur-sm shadow-lg">
+		<header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-lg">
 			<nav className="py-0">
 				<div className="container px-4 mx-auto h-[10vh] flex items-center justify-between">
 					<div className="flex items-center">
@@ -85,7 +85,7 @@ function Navbar() {
 							</li>
 							{isLogged && user?.role === "admin" && (
 								<li>
-									<NavbarLink href="/add">Aggiungi Foto</NavbarLink>
+									<NavbarLink href="/add-photo">Aggiungi Foto</NavbarLink>
 								</li>
 							)}
 

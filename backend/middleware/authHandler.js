@@ -9,7 +9,6 @@ const jsonwebtoken = require("jsonwebtoken");
 module.exports = (req, res, next) =>
 {
   const bearer = req.headers.authorization;
-
   // controllo il bearer
   if (!bearer || !bearer.startsWith("Bearer "))
   {

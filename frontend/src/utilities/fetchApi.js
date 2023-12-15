@@ -12,6 +12,7 @@ async function fetchApi(path, method = "GET", body = null)
 		});
 
 		const data = await resp.json();
+		console.log(data);
 		if (!resp.ok)
 		{
 			if (data.error === "TokenExpiredError" || data.error === "AuthError")
@@ -25,7 +26,6 @@ async function fetchApi(path, method = "GET", body = null)
 		return data;
 	} catch (err)
 	{
-
 		throw err;
 	}
 }
