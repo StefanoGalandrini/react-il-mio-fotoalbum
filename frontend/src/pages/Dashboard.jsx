@@ -11,10 +11,6 @@ function Dashboard() {
 		fetchFilteredPhotos("");
 	}, []);
 
-	// const handleSearchSubmit = (searchTerm) => {
-	// 	fetchFilteredPhotos(searchTerm);
-	// };
-
 	function handlePhotoDelete(deletedPhotoId) {
 		const updatedPhotos = photos.filter((p) => p.id !== deletedPhotoId);
 		setPhotos(updatedPhotos);

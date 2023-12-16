@@ -5,6 +5,7 @@ import axios from "axios";
 
 function AddPhotoForm() {
 	const serverUrl = "http://localhost:3000";
+	const navigate = useNavigate();
 	const [imagePreview, setImagePreview] = useState(null);
 	const [categories, setCategories] = useState([]);
 	const [photos, setPhotos] = useState([]);
@@ -19,7 +20,6 @@ function AddPhotoForm() {
 		userId: 1,
 		categories: [],
 	});
-	const navigate = useNavigate();
 
 	// initial loading data
 	useEffect(() => {
@@ -61,7 +61,7 @@ function AddPhotoForm() {
 		}
 		axios({
 			method: "POST",
-			url: "http://localhost:3000/admin/photos",
+			url: `${serverUrl}/admin/photos`,
 			data: formData,
 			headers: {
 				"Content-Type": "multipart/form-data",
@@ -69,12 +69,17 @@ function AddPhotoForm() {
 			},
 		})
 			.then((response) => {
-				if (response.status === 200) {
+				console.log(response);
+				if (response.status >= 200 && response.status < 300) {
 					setPhotos((prevPhotos) => [...prevPhotos, response.data.photo]);
 					resetForm();
+					navigate("/dashboard");
 				}
 			})
 			.catch((error) => {
+				alert(
+					"Errore nel salvataggio della foto: " + error.response.data.message,
+				);
 				console.log("Errore nel salvataggio della foto:", error);
 			});
 	}
