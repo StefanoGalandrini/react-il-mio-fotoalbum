@@ -130,7 +130,7 @@ async function show(req, res, next)
 
 
 
-// update - update a single photo by slug
+// update - update a single photo by id
 /**
  * 
  * @param {express.Request} req 
@@ -143,35 +143,45 @@ async function update(req, res, next)
 	{
 		return next(new ValidationError("Controllare i dati inseriti", validation.array()));
 	}
-
 	const { id } = req.params;
 	let updateData = {};
-
 	const photo = await prisma.photo.findUnique({
 		where: { id: parseInt(id) },
+		include: {
+			categories: true,
+		},
 	});
-
+	// Verifica che la foto esista
 	if (!photo)
 	{
 		return next(new NotFound(`Foto non trovata con ID: ${id}`));
 	}
-
 	// Aggiorna i campi di testo da FormData
 	if (req.body.title)
 	{
 		updateData.title = req.body.title;
 	}
-
 	if (req.body.description)
 	{
 		updateData.description = req.body.description;
 	}
-
 	if (req.body.visible)
 	{
 		updateData.visible = req.body.visible === 'true';
 	}
-
+	// Gestisci le categorie
+	if (req.body.categories)
+	{
+		const categoryIds = req.body.categories.map(id => parseInt(id));
+		const existingCategoryIds = photo.categories.map(category => category.id);
+		const categoriesToDisconnect = existingCategoryIds.filter(id => !categoryIds.includes(id));
+		const categoriesToConnect = categoryIds.filter(id => !existingCategoryIds.includes(id));
+		// disconnette e ricconnette le categorie aggiornate
+		updateData.categories = {
+			disconnect: categoriesToDisconnect.map(id => ({ id })),
+			connect: categoriesToConnect.map(id => ({ id })),
+		};
+	}
 	// Aggiorna l'immagine
 	if (req.file)
 	{
@@ -188,7 +198,6 @@ async function update(req, res, next)
 		}
 		updateData.image = req.file.path;
 	}
-
 	// Esegui l'aggiornamento
 	try
 	{
@@ -200,7 +209,8 @@ async function update(req, res, next)
 				categories: true,
 			},
 		});
-
+		console.log("Foto aggiornata con successo:", updatedPhoto);
+		// Rispondi con i dati aggiornati
 		res.json(updatedPhoto);
 	} catch (error)
 	{
