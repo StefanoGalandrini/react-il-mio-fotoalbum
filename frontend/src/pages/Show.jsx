@@ -23,7 +23,6 @@ function Show() {
 			}
 		});
 	}, [id]);
-	console.log(photo);
 	if (!photo) {
 		return <div>Caricamento...</div>;
 	}

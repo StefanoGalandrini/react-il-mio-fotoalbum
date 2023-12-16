@@ -16,7 +16,7 @@ export const SearchProvider = ({children}) => {
 	};
 
 	return (
-		<SearchContext.Provider value={{photos, fetchFilteredPhotos}}>
+		<SearchContext.Provider value={{photos, setPhotos, fetchFilteredPhotos}}>
 			{children}
 		</SearchContext.Provider>
 	);

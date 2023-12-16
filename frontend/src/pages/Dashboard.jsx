@@ -5,7 +5,7 @@ import PhotoCard from "../components/PhotoCard";
 import Sidebar from "../components/Sidebar";
 
 function Dashboard() {
-	const {photos, fetchFilteredPhotos} = useSearch();
+	const {photos, setPhotos, fetchFilteredPhotos} = useSearch();
 
 	useEffect(() => {
 		fetchFilteredPhotos("");
@@ -14,6 +14,11 @@ function Dashboard() {
 	// const handleSearchSubmit = (searchTerm) => {
 	// 	fetchFilteredPhotos(searchTerm);
 	// };
+
+	function handlePhotoDelete(deletedPhotoId) {
+		const updatedPhotos = photos.filter((p) => p.id !== deletedPhotoId);
+		setPhotos(updatedPhotos);
+	}
 
 	return (
 		<>
@@ -24,7 +29,11 @@ function Dashboard() {
 
 					<div className="container flex flex-wrap justify-start items-stretch gap-5">
 						{photos.map((photo) => (
-							<PhotoCard key={photo.id} photo={photo} />
+							<PhotoCard
+								key={photo.id}
+								photo={photo}
+								onDelete={handlePhotoDelete}
+							/>
 						))}
 					</div>
 				</div>

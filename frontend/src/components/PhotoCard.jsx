@@ -1,11 +1,43 @@
-import {Navigate, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
-function Card({photo, showAll}) {
+function Card({photo, onDelete}) {
+	const serverUrl = "http://localhost:3000";
 	const navigate = useNavigate();
-	const show = () => navigate(`/show/${photo.id}`);
-	/* if (!showAll && !photo.visible) {
-		return null;
-	} */
+
+	function show() {
+		navigate(`/show/${photo.id}`);
+	}
+
+	function handleEdit() {
+		navigate(`/edit-photo/${photo.id}`);
+	}
+
+	function handleDelete() {
+		axios({
+			method: "DELETE",
+			url: `${serverUrl}/admin/photos/${photo.id}`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+			.then((response) => {
+				if (response.status === 200) {
+					onDelete(photo.id);
+					alert("Foto eliminata");
+				}
+			})
+			.catch((error) => {
+				alert(
+					`Errore nell'eliminazione della foto: ${
+						error.response?.data?.message || error.message
+					}`,
+				);
+			});
+	}
+
 	const imageUrl =
 		import.meta.env.VITE_API_URL + "/" + photo.image.replace(/\\/g, "/");
 	return (
@@ -26,10 +58,22 @@ function Card({photo, showAll}) {
 						{photo.categories.map((category, index) => (
 							<span
 								key={index}
-								className="bg-amber-700 text-gray-100 text-xs rounded-full px-3 py-1">
+								className="bg-amber-400 text-gray-800 font-light text-xs rounded-full px-3 py-1">
 								{category.name}
 							</span>
 						))}
+					</div>
+					<div className="flex justify-center gap-6 mt-6">
+						<button
+							onClick={handleEdit}
+							className="px-3 py-1 rounded-md bg-lime-900 text-stone-300 hover:bg-lime-700 hover:text-white">
+							<i className="fa-solid fa-pen-to-square"></i> Modifica
+						</button>
+						<button
+							onClick={handleDelete}
+							className="px-3 py-1 rounded-md bg-red-800 text-stone-300 hover:bg-red-600 hover:text-white">
+							<i className="fa-solid fa-trash-can"></i> Elimina
+						</button>
 					</div>
 				</div>
 			</div>

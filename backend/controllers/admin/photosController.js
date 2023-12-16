@@ -250,7 +250,7 @@ async function destroy(req, res, next)
 			where: { id: parseInt(id) }
 		});
 
-		res.json({ message: "Foto eliminata con successo" });
+		res.status(200).json({ message: "Foto eliminata con successo" });
 	} catch (error)
 	{
 		console.error(error);

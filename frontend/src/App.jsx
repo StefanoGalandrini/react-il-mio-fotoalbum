@@ -10,6 +10,7 @@ import Dashboard from "./pages/Dashboard";
 import CategoriesManage from "./pages/CategoriesManage";
 import Create from "./pages/AddPhotoForm";
 import AddPhotoForm from "./pages/AddPhotoForm";
+import EditPhotoForm from "./pages/EditPhotoForm";
 import Show from "./pages/Show";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 									<Route path="create" element={<Create />} />
 									<Route path="add-photo" element={<AddPhotoForm />} />
 									<Route path="show/:id" element={<Show />} />
+									<Route path="edit-photo/:id" element={<EditPhotoForm />} />
 								</Route>
 							</Route>
 						</Routes>

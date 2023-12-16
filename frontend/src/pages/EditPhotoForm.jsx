@@ -1,5 +1,4 @@
 import {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
 import fetchApi from "../utilities/fetchApi";
 import axios from "axios";
 
@@ -19,9 +18,12 @@ function AddPhotoForm() {
 		userId: 1,
 		categories: [],
 	});
-	const navigate = useNavigate();
 
 	// initial loading data
+	let initCategories = false;
+	let initTags = false;
+	let initArticles = false;
+
 	useEffect(() => {
 		async function fetchCategories() {
 			try {
@@ -74,9 +76,10 @@ function AddPhotoForm() {
 					resetForm();
 				}
 			})
-			.catch((error) => {
-				console.log("Errore nel salvataggio della foto:", error);
-			});
+			.catch(error);
+		{
+			console.log("Errore nel salvataggio della foto:", error);
+		}
 	}
 
 	// Aggiorna i dati nel database
@@ -108,6 +111,33 @@ function AddPhotoForm() {
 			resetForm();
 		} catch (error) {
 			console.error("Errore durante l'aggiornamento dell'articolo:", error);
+		}
+	}
+
+	async function handleDelete(photoId) {
+		try {
+			const photoToDelete = photos.find((photo) => photo.id === photoId);
+			if (!photoToDelete) {
+				throw new Error("Articolo non trovato");
+			}
+			// Invia richiesta DELETE al server
+			const response = await fetchApi(
+				`/admin/photos/${photoToDelete.id}`,
+				"DELETE",
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				},
+			);
+			if (!response.ok) {
+				throw new Error("Errore nella cancellazione dell'articolo");
+			}
+			// Aggiorna lo stato rimuovendo l'articolo cancellato
+			const updatedPhotos = photos.filter((photo) => photo.id !== photoId);
+			setPhotos(updatedPhotos);
+		} catch (error) {
+			console.error("Errore nella cancellazione dell'articolo:", error);
 		}
 	}
 
