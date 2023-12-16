@@ -1,4 +1,8 @@
+import {Navigate, useNavigate} from "react-router-dom";
+
 function Card({photo, showAll}) {
+	const navigate = useNavigate();
+	const show = () => navigate(`/show/${photo.id}`);
 	/* if (!showAll && !photo.visible) {
 		return null;
 	} */
@@ -7,7 +11,12 @@ function Card({photo, showAll}) {
 	return (
 		<div className=" max-w-md transition transform hover:scale-105 duration-300">
 			<div className="bg-gray-100 flex-1 rounded-lg overflow-hidden shadow-md shadow-slate-800 border-2 border-teal-800">
-				<img src={imageUrl} alt={photo.title} className="w-full" />
+				<img
+					src={imageUrl}
+					alt={photo.title}
+					className="w-full"
+					onClick={show}
+				/>
 				<div className="p-4">
 					<h5 className="text-xl text-center mb-3 font-bold text-teal-800">
 						{photo.title}

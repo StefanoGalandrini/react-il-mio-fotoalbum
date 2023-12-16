@@ -61,35 +61,23 @@ function AddPhotoForm() {
 		if (photo.imageFile) {
 			formData.append("image", photo.imageFile);
 		}
-		try {
-			const token = localStorage.getItem("token");
-			axios({
-				method: "post",
-				url: "http://localhost:3000/admin/photos",
-				data: formData,
-				headers: {
-					"Content-Type": "multipart/form-data",
-					Authorization: "Bearer " + token,
-				},
-			}).then((response) => {
+		axios({
+			method: "POST",
+			url: "http://localhost:3000/admin/photos",
+			data: formData,
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Authorization: "Bearer " + localStorage.getItem("token"),
+			},
+		})
+			.then((response) => {
 				if (response.status === 200) {
-					console.log("Response: ", response.data);
 					setPhotos((prevPhotos) => [...prevPhotos, response.data.photo]);
 					resetForm();
 				}
-				console.log("Response: ", response.data);
-
-				// const response = await fetchApi("/admin/photos", "POST", formData);
-				// if (!response.ok) {
-				// 	throw new Error(`HTTP error! status: ${response.status}`);
-				// }
-				// const savedPhoto = response;
-				// setPhotos((prevPhotos) => [...prevPhotos, savedPhoto.photo]);
-				// resetForm();
-				// } catch (error) {
-				// 	console.log("Errore nel salvataggio della foto:", error);
-			});
-		} catch (error) {
+			})
+			.catch(error);
+		{
 			console.log("Errore nel salvataggio della foto:", error);
 		}
 	}

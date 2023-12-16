@@ -38,7 +38,7 @@ function Sidebar() {
 	}
 
 	return (
-		<div className="fixed top-[10vh] h-screen right-0 w-[15vw] bg-stone-400 p-4 shadow text-fuchsia-900">
+		<div className="fixed top-[10vh] h-screen right-0 w-[12vw] bg-stone-400 p-4 shadow text-fuchsia-900">
 			{user && user.role === "admin" ? (
 				// Menu per Admin
 				<div className="flex flex-col">
