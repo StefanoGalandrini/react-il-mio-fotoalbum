@@ -41,14 +41,14 @@ function CategoriesManage() {
 
 	return (
 		<>
-			<div className="h-[90vh] w-screen flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
+			<div className="mt-[10vh] w-screen h-screen flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
 				<h2 className="text-3xl text-center uppercase my-5">
 					Gestione Categorie
 				</h2>
-				<div className="container mx-auto">
+				<div className=" w-screen px-[30vw]">
 					<div className="flex gap-10">
 						{/* Elenco Categorie */}
-						<div className="w-1/4">
+						<div className="w-5/12">
 							<h3 className="text-xl mb-3 font-semibold">Elenco Categorie</h3>
 							<ul className="list-disc">
 								{categories.map((category) => (
@@ -65,9 +65,9 @@ function CategoriesManage() {
 								))}
 							</ul>
 						</div>
-						<div className="w-1/2"></div>
+						<div className="w-2/12"></div>
 						{/* Form Aggiungi Categoria */}
-						<div className="w-1/2">
+						<div className="w-5/12">
 							<h3 className="text-xl mb-3 font-semibold">Aggiungi Categoria</h3>
 							<form
 								onSubmit={handleAddCategory}
