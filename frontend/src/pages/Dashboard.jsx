@@ -21,9 +21,9 @@ function Dashboard() {
 			<div className="bg-[url('/background.jpg')] mt-[10vh] bg-fixed bg-cover bg-center min-h-screen">
 				<Sidebar />
 				<div className="h-full w-[88vw] mx-auto mt-[10vh] flex flex-col justify-center items-center text-gray-800">
-					<h1 className="my-5 uppercase text-3xl">le nostre foto</h1>
+					<h1 className="my-8 uppercase text-3xl">le nostre foto</h1>
 
-					<div className="container flex flex-wrap justify-start items-stretch gap-5">
+					<div className="container flex flex-wrap justify-start items-stretch gap-5 mb-20">
 						{photos.map((photo) => (
 							<PhotoCard
 								key={photo.id}

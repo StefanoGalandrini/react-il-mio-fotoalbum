@@ -8,9 +8,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CategoriesManage from "./pages/CategoriesManage";
-import Create from "./pages/AddPhotoForm";
-import AddPhotoForm from "./pages/AddPhotoForm";
-import EditPhotoForm from "./pages/EditPhotoForm";
+import Create from "./pages/PhotoForm";
+import PhotoForm from "./pages/PhotoForm";
 import Show from "./pages/Show";
 
 function App() {
@@ -32,9 +31,9 @@ function App() {
 										element={<CategoriesManage />}
 									/>
 									<Route path="create" element={<Create />} />
-									<Route path="add-photo" element={<AddPhotoForm />} />
+									<Route path="add-photo" element={<PhotoForm />} />
 									<Route path="show/:id" element={<Show />} />
-									<Route path="edit-photo/:id" element={<EditPhotoForm />} />
+									<Route path="edit-photo/:id" element={<PhotoForm />} />
 								</Route>
 							</Route>
 						</Routes>

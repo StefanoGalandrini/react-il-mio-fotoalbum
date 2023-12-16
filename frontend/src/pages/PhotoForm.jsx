@@ -1,9 +1,10 @@
 import {useState, useEffect} from "react";
+import {useLocation} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import fetchApi from "../utilities/fetchApi";
 import axios from "axios";
 
-function AddPhotoForm() {
+function PhotoForm() {
 	const serverUrl = "http://localhost:3000";
 	const navigate = useNavigate();
 	const [imagePreview, setImagePreview] = useState(null);
@@ -20,6 +21,30 @@ function AddPhotoForm() {
 		userId: 1,
 		categories: [],
 	});
+
+	// if editing
+	const location = useLocation();
+
+	const {transformedPhoto, editPhoto} = location.state || {};
+
+	useEffect(() => {
+		if (editPhoto) {
+			setIsEditing(true);
+			const photoToEdit = transformedPhoto;
+			const photoCategories = {};
+			Object.keys(photoToEdit.categories).forEach((key) => {
+				photoCategories[key] = photoToEdit.categories[key];
+			});
+			setPhotoData({
+				...photoToEdit,
+				categories: photoCategories,
+				imageUrl: photoToEdit.image,
+			});
+		} else {
+			setIsEditing(false);
+			resetForm();
+		}
+	}, [editPhoto, transformedPhoto]);
 
 	// initial loading data
 	useEffect(() => {
@@ -44,18 +69,14 @@ function AddPhotoForm() {
 			visible: false,
 		});
 		setIsEditing(false);
-		// setShowOverlay(false);
-		// setFormErrors({});
 	}
 
 	// Salva i dati nel database
 	function savePhoto(photo) {
 		const formData = new FormData();
-
 		for (let [key, value] of photo.entries()) {
 			formData.append(key, value);
 		}
-
 		if (photo.imageFile) {
 			formData.append("image", photo.imageFile);
 		}
@@ -69,7 +90,6 @@ function AddPhotoForm() {
 			},
 		})
 			.then((response) => {
-				console.log(response);
 				if (response.status >= 200 && response.status < 300) {
 					setPhotos((prevPhotos) => [...prevPhotos, response.data.photo]);
 					resetForm();
@@ -85,7 +105,7 @@ function AddPhotoForm() {
 	}
 
 	// Aggiorna i dati nel database
-	async function updatePhoto(photo) {
+	async function updatePhoto(photo, photoId) {
 		const formData = new FormData();
 		formData.append("title", photo.get("title"));
 		formData.append("description", photo.get("description"));
@@ -98,22 +118,30 @@ function AddPhotoForm() {
 		if (imageFile) {
 			formData.append("image", imageFile);
 		}
-		// Recupera l'ID per l'URL della richiesta
-		const id = photo.get("id");
-		// Invia la richiesta
-		try {
-			const response = await fetchApi(`/admin/photos/${id}`, "PATCH", formData);
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-			const updatedPhoto = await response.json();
-			setPhotos((prevPhotos) =>
-				prevPhotos.map((p) => (p.id === updatedPhoto.id ? updatedPhoto : p)),
-			);
-			resetForm();
-		} catch (error) {
-			console.error("Errore durante l'aggiornamento dell'articolo:", error);
-		}
+		axios({
+			method: "PATCH",
+			url: `${serverUrl}/admin/photos/${photoId}`,
+			data: formData,
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Authorization: "Bearer " + localStorage.getItem("token"),
+			},
+		})
+			.then((response) => {
+				if (response.status >= 200 && response.status < 300) {
+					setPhotos((prevPhotos) =>
+						prevPhotos.map((p) =>
+							p.id === response.data.photo.id ? response.data.photo : p,
+						),
+					);
+					resetForm();
+					navigate("/dashboard");
+				}
+			})
+			.catch((error) => {
+				alert("Errore nell'aggiornamento della foto");
+				console.log("Errore nell'aggiornamento della foto:", error);
+			});
 	}
 
 	// validate form
@@ -149,20 +177,6 @@ function AddPhotoForm() {
 		}
 	}
 
-	function handleEdit(photoId) {
-		setIsEditing(true);
-		const photoToEdit = photos.find((photo) => photo.id === photoId);
-		const photoCategories = {};
-		photoToEdit.categories.forEach((category) => {
-			photoCategories[category.id] = true;
-		});
-		setPhotoData({
-			...photoToEdit,
-			categories: photoCategories,
-			imageUrl: photoToEdit.image,
-		});
-	}
-
 	function handleFormSubmit(event) {
 		event.preventDefault();
 		if (!validateForm(photoData)) {
@@ -172,7 +186,6 @@ function AddPhotoForm() {
 		formData.append("title", photoData.title);
 		formData.append("description", photoData.description);
 		formData.append("visible", photoData.visible.toString());
-		formData.append("userId", photoData.userId);
 		const categoriesArray = Object.keys(photoData.categories)
 			.filter((categoryId) => photoData.categories[categoryId])
 			.map((categoryId) => parseInt(categoryId));
@@ -183,7 +196,7 @@ function AddPhotoForm() {
 			formData.append("image", photoData.imageFile);
 		}
 		if (isEditing) {
-			updatePhoto(formData);
+			updatePhoto(formData, photoData.id);
 		} else {
 			savePhoto(formData);
 		}
@@ -338,4 +351,4 @@ function AddPhotoForm() {
 	);
 }
 
-export default AddPhotoForm;
+export default PhotoForm;

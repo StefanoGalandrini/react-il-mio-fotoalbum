@@ -1,8 +1,7 @@
-import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
-function Card({photo, onDelete}) {
+function PhotoCard({photo, onDelete}) {
 	const serverUrl = "http://localhost:3000";
 	const navigate = useNavigate();
 
@@ -11,7 +10,19 @@ function Card({photo, onDelete}) {
 	}
 
 	function handleEdit() {
-		navigate(`/edit-photo/${photo.id}`);
+		const transformedPhoto = {
+			...photo,
+			categories: photo.categories.reduce((acc, category) => {
+				acc[category.id] = true;
+				return acc;
+			}, {}),
+		};
+		navigate(`/edit-photo/${photo.id}`, {
+			state: {
+				transformedPhoto: transformedPhoto,
+				editPhoto: true,
+			},
+		});
 	}
 
 	function handleDelete() {
@@ -40,6 +51,7 @@ function Card({photo, onDelete}) {
 
 	const imageUrl =
 		import.meta.env.VITE_API_URL + "/" + photo.image.replace(/\\/g, "/");
+
 	return (
 		<div className=" max-w-md transition transform hover:scale-105 duration-300">
 			<div className="bg-gray-100 flex-1 rounded-lg overflow-hidden shadow-md shadow-slate-800 border-2 border-teal-800">
@@ -81,4 +93,4 @@ function Card({photo, onDelete}) {
 	);
 }
 
-export default Card;
+export default PhotoCard;

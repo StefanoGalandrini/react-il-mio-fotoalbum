@@ -12,7 +12,6 @@ async function fetchApi(path, method = "GET", body = null)
 		});
 
 		const data = await resp.json();
-		console.log(data);
 		if (!resp.ok)
 		{
 			if (data.error === "TokenExpiredError" || data.error === "AuthError")
