@@ -16,7 +16,7 @@ body {
 }
 
 .wrapper {
-	max-width: 90vw;
+	max-width: 95vw;
 	margin: 10vh auto;
 	padding-right: 12vw;
 }
@@ -31,10 +31,25 @@ body {
 	color: white;
 }
 
-#card-template.card {
+#card-template.guest-card {
 	display: grid;
-	grid-template-columns: 340px;
-	grid-template-rows: 250px 220px 80px;
+	grid-template-columns: 500px;
+	grid-template-rows: 350px 50px 10px;
+	grid-template-areas: "image" "text" "buttons";
+	border-radius: 18px;
+	background-color: #101010;
+	background-repeat: no-repeat;
+	box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.3);
+	text-align: center;
+	border: 2px solid black;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+#card-template.admin-card {
+	display: grid;
+	grid-template-columns: 500px;
+	grid-template-rows: 350px 70px 80px;
 	grid-template-areas: "image" "text" "buttons";
 	border-radius: 18px;
 	background-color: #101010;

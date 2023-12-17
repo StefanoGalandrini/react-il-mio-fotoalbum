@@ -7,6 +7,10 @@ function PhotoCard({photo, onDelete}) {
 	const navigate = useNavigate();
 	const {user} = useAuth();
 
+	const cardClass = user ? "admin-card" : "guest-card";
+	const handleClick = user ? () => show() : undefined;
+	const additionalClasses = user ? "cursor-pointer" : "";
+
 	function show() {
 		navigate(`/show/${photo.id}`);
 	}
@@ -57,19 +61,19 @@ function PhotoCard({photo, onDelete}) {
 	return (
 		<div
 			id="card-template"
-			className="card transition-all transform hover:scale-105 duration-200">
+			className={`${cardClass} transition-all transform hover:scale-105 duration-200`}>
 			<div
-				onClick={show}
+				onClick={handleClick}
 				style={{"--image": `url("${imageUrl}")`}}
-				className="card-image bg-[image:var(--image)] cursor-pointer"></div>
+				className={`card-image bg-[image:var(--image)] ${additionalClasses}`}></div>
 			<div className="card-text p-4">
 				<h5 className="text-xl text-center mb-3 font-bold text-teal-300">
 					{photo.title}
 				</h5>
-				<p className="text-center font-light text-gray-200 italic mb-8">
+				{/* <p className="text-center font-light text-gray-200 italic mb-8">
 					{photo.description}
-				</p>
-				<div className="flex flex-wrap gap-2 justify-center">
+				</p> */}
+				{/* <div className="flex flex-wrap gap-2 justify-center">
 					{photo.categories.map((category, index) => (
 						<span
 							key={index}
@@ -77,7 +81,7 @@ function PhotoCard({photo, onDelete}) {
 							{category.name}
 						</span>
 					))}
-				</div>
+				</div> */}
 			</div>
 			{user ? (
 				<div className="card-buttons flex justify-center gap-6 mt-6">

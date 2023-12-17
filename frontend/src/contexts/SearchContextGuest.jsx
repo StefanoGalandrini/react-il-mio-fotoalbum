@@ -10,8 +10,6 @@ export const SearchProviderGuest = ({children}) => {
 		try {
 			const response = await fetchApi(`/guests/photos?title=${filter}`, "GET");
 			setPhotos(response);
-
-			console.log("FUEST RESOPONSE", response);
 		} catch (error) {
 			console.error("Errore nella richiesta filtrata delle foto:", error);
 		}
