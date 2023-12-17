@@ -90,7 +90,7 @@ function Show() {
 					</p>
 
 					{/* Dettagli foto */}
-					<p className="mt-20 text-gray-100 font-medium text-sm border-t-2 border-violet-500 pt-2">
+					<p className="mt-20 text-violet-300 font-medium text-sm border-t-2 border-violet-500 pt-2">
 						Foto creata il {formattedDate} da {fullName}
 					</p>
 				</div>

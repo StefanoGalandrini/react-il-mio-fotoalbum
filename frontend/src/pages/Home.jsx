@@ -18,7 +18,7 @@ function Home() {
 				<h1 className="my-8 text-3xl text-teal-300 text-center">
 					Le nostre foto
 				</h1>
-				<div className="flex flex-wrap justify-between items-start gap-7 mb-20">
+				<div className="flex flex-wrap justify-center items-start gap-7 mb-20">
 					{photos.map((photo) => (
 						<PhotoCard key={photo.id} photo={photo} />
 					))}

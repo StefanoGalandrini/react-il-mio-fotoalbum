@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
-import fetchApi from "../utilities/fetchApi";
 import axios from "axios";
 
 function PhotoForm() {
@@ -49,12 +48,19 @@ function PhotoForm() {
 	// initial loading data
 	useEffect(() => {
 		async function fetchCategories() {
-			try {
-				const data = await fetchApi("/admin/categories", "GET");
-				setCategories(data);
-			} catch (error) {
-				console.error("Errore nel recupero delle categorie:", error);
-			}
+			await axios({
+				method: "GET",
+				url: `${serverUrl}/admin/categories`,
+				headers: {
+					Authorization: "Bearer " + localStorage.getItem("token"),
+				},
+			})
+				.then((response) => {
+					setCategories(response.data);
+				})
+				.catch((error) => {
+					console.error("Errore nel recupero delle categorie:", error);
+				});
 		}
 		fetchCategories();
 	}, []);

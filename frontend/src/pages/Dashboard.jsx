@@ -25,7 +25,7 @@ function Dashboard() {
 				<h1 className="my-8 text-3xl text-teal-300 text-center">
 					Ciao, {user.firstName} {user.lastName}
 				</h1>
-				<div className="flex flex-wrap justify-between items-start gap-7 mb-20">
+				<div className="flex flex-wrap justify-center items-start gap-7 mb-20">
 					{photos.map((photo) => (
 						<PhotoCard
 							key={photo.id}

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useAuth} from "../contexts/AuthContext";
 import {useNavigate} from "react-router-dom";
-import fetchApi from "../utilities/fetchApi";
+import axios from "axios";
 import {handleInputChange} from "../utilities/handleInputChange";
 
 export default function Login() {
@@ -12,17 +12,23 @@ export default function Login() {
 	const navigate = useNavigate();
 	const {handleLoginOrRegistration} = useAuth();
 	const [error, setError] = useState("");
+	const serverUrl = "http://localhost:3000";
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setError(null);
-		try {
-			const response = await fetchApi("/login", "POST", formData);
-			handleLoginOrRegistration(response);
-			navigate("/dashboard");
-		} catch (error) {
-			setError(error.message);
-		}
+		await axios({
+			method: "post",
+			url: `${serverUrl}/login`,
+			data: formData,
+		})
+			.then((response) => {
+				handleLoginOrRegistration(response.data);
+				navigate("/dashboard");
+			})
+			.catch((error) => {
+				setError(error.message);
+			});
 	}
 
 	return (
