@@ -40,29 +40,32 @@ function Navbar() {
 	}
 
 	return (
-		<header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-lg">
+		<header className="fixed top-0 left-0 right-0 z-50 bg-black/90 shadow-md shadow-white/20">
 			<nav className="py-0">
 				<div className=" w-[90%] mx-auto h-[10vh] flex items-center justify-between">
-					<div className="flex items-center">
-						<p className="font-bold text-teal-800 uppercase text-xl">
+					<div className="flex flex-col items-center">
+						<p className="font-bold text-teal-300 uppercase text-lg">
 							obiettivo
 						</p>
 						<img
 							src="/logo-ok.png"
 							alt="Blog Logo"
-							className="w-[3rem] m-1 rounded-full border-2 border-teal-800 overflow-hidden"
+							className="w-[1.7rem] h-[1.7rem] bg-center bg-cover rounded-full"
 						/>
-						<p className="uppercase font-bold text-teal-800 text-xl">sfocato</p>
+						<p className="uppercase font-bold text-teal-300 text-lg">sfocato</p>
 					</div>
 
-					<div className="text-fuchsia-900">
-						<p className="text-3xl uppercase font-bold pl-10">
-							La perfezione è sopravvalutata
+					<div className="flex flex-col items-center">
+						<p className="text-3xl text-violet-300 uppercase font-bold pl-10">
+							Studio fotografico
+						</p>
+						<p className="text-lg text-violet-500 font-bold pl-10">
+							«La perfezione è sopravvalutata»
 						</p>
 					</div>
 
-					<div>
-						<ul className="flex gap-3">
+					<div id="navbar">
+						<ul className="flex gap-3 text-teal-300">
 							<li>
 								{isLogged ? (
 									<NavbarLink href="/dashboard">Dashboard</NavbarLink>
@@ -78,11 +81,11 @@ function Navbar() {
 										placeholder="Cerca per titolo..."
 										value={search}
 										onChange={handleSearchChange}
-										className="border rounded py-1 px-2 focus:outline-none focus:border-teal-800 focus:border-2"
+										className="text-gray-800 rounded py-1 px-2 border-4 border-transparent hover:border-teal-300 focus:outline-none focus:border-teal-300 focus:border-4"
 									/>
 									<button
 										type="submit"
-										className="ml-2 rounded-md text-slate-200 bg-teal-800 px-3 py-1 transition delay-150 hover:bg-teal-600 hover:text-white">
+										className="ml-2 rounded-md text-white bg-teal-600 px-3 py-2 transition delay-150 hover:bg-teal-300 hover:text-stone-700">
 										Cerca
 									</button>
 								</form>

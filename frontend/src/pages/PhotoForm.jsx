@@ -157,18 +157,46 @@ function PhotoForm() {
 	/* ------------------------------ */
 	/* FUNZIONI */
 
+	// function handleChange(event) {
+	// 	const {name, value, checked, type, files} = event.target;
+	// 	if (name === "image" && files.length > 0) {
+	// 		setPhotoData({...photoData, imageFile: files[0]});
+	// 	} else if (type === "checkbox" && name === "categories") {
+	// 		setPhotoData((prev) => ({
+	// 			...prev,
+	// 			categories: {
+	// 				...prev.categories,
+	// 				[value]: checked,
+	// 			},
+	// 		}));
+	// 	} else {
+	// 		setPhotoData((prev) => ({
+	// 			...prev,
+	// 			[name]: value,
+	// 		}));
+	// 	}
+	// }
+
 	function handleChange(event) {
 		const {name, value, checked, type, files} = event.target;
-		if (name === "image" && files.length > 0) {
-			setPhotoData({...photoData, imageFile: files[0]});
-		} else if (type === "checkbox" && name === "categories") {
-			setPhotoData((prev) => ({
-				...prev,
-				categories: {
-					...prev.categories,
-					[value]: checked,
-				},
-			}));
+
+		if (type === "checkbox") {
+			if (name === "visible") {
+				setPhotoData((prev) => ({
+					...prev,
+					[name]: checked,
+				}));
+			} else if (name === "categories") {
+				setPhotoData((prev) => ({
+					...prev,
+					categories: {
+						...prev.categories,
+						[value]: checked,
+					},
+				}));
+			}
+		} else if (type === "file" && name === "image" && files.length > 0) {
+			setPhotoData((prev) => ({...prev, imageFile: files[0]}));
 		} else {
 			setPhotoData((prev) => ({
 				...prev,
@@ -236,7 +264,7 @@ function PhotoForm() {
 
 	return (
 		<div className="overlay fixed inset-0 bg-gray-700 bg-opacity-80 flex justify-center items-center">
-			<div className="bg-cyan-950 p-6 rounded-lg shadow-lg border-2">
+			<div className="bg-teal-950 p-6 rounded-lg shadow-lg border-2">
 				<form
 					onSubmit={handleFormSubmit}
 					className="flex flex-col items-center justify-center space-y-4 w-full max-w-2xl mx-auto">

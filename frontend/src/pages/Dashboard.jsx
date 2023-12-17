@@ -3,10 +3,11 @@ import {useEffect} from "react";
 import {useSearch} from "../contexts/SearchContext";
 import PhotoCard from "../components/PhotoCard";
 import Sidebar from "../components/Sidebar";
+import {useAuth} from "../contexts/AuthContext";
 
 function Dashboard() {
 	const {photos, setPhotos, fetchFilteredPhotos} = useSearch();
-
+	const {user} = useAuth();
 	useEffect(() => {
 		fetchFilteredPhotos("");
 	}, []);
@@ -18,20 +19,19 @@ function Dashboard() {
 
 	return (
 		<>
-			<div className="bg-[url('/background.jpg')] mt-[10vh] bg-fixed bg-cover bg-center min-h-screen">
-				<Sidebar />
-				<div className="h-full w-[88vw] mx-auto mt-[10vh] flex flex-col justify-center items-center text-gray-800">
-					<h1 className="my-8 uppercase text-3xl">le nostre foto</h1>
-
-					<div className="container flex flex-wrap justify-start items-stretch gap-5 mb-20">
-						{photos.map((photo) => (
-							<PhotoCard
-								key={photo.id}
-								photo={photo}
-								onDelete={handlePhotoDelete}
-							/>
-						))}
-					</div>
+			<Sidebar />
+			<div className="wrapper flex flex-col justify-start items-between">
+				<h1 className="my-8 text-3xl text-violet-300 text-center">
+					Ciao, {user.firstName} {user.lastName}
+				</h1>
+				<div className="flex flex-wrap justify-between items-start gap-7 mb-20">
+					{photos.map((photo) => (
+						<PhotoCard
+							key={photo.id}
+							photo={photo}
+							onDelete={handlePhotoDelete}
+						/>
+					))}
 				</div>
 			</div>
 		</>

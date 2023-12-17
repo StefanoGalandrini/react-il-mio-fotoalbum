@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
+        sans: ['Work Sans', 'Comfortaa', 'sans-serif'],
       },
     },
   },

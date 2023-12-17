@@ -38,18 +38,20 @@ function Sidebar() {
 	}
 
 	return (
-		<div className="fixed top-[10vh] h-screen right-0 w-[12vw] bg-stone-400 p-4 shadow text-fuchsia-900">
+		<div className="fixed top-[10vh] h-screen right-0 w-[12vw] bg-white/20 p-4 text-violet-300">
 			{user && user.role === "admin" ? (
 				// Menu per Admin
 				<div className="flex flex-col">
-					<p className="font-bold text-lg text-center mb-4">
-						Gestione Categorie
+					<p className="font-bold text-xl text-center text-white my-10 uppercase underline underline-offset-4">
+						&nbsp;&nbsp;Categorie&nbsp;&nbsp;
 					</p>
-					<NavbarLink
-						href="/categories-manage"
-						className="block mb-2 text-left">
-						Gestione Categorie
-					</NavbarLink>
+					<div id="sidebar" className="bg-stone-400 rounded-lg text-violet-800">
+						<NavbarLink
+							href="/categories-manage"
+							className="block mb-2 text-left font-bold">
+							Visualizza, aggiungi o rimuovi le categorie delle foto
+						</NavbarLink>
+					</div>
 				</div>
 			) : (
 				// Form per Messaggi
