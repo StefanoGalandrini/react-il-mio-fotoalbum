@@ -5,23 +5,21 @@ const SearchContextGuest = createContext();
 
 export const SearchProviderGuest = ({children}) => {
 	const [photos, setPhotos] = useState([]);
-	const [searchTerm, setSearchTerm] = useState("");
 
 	const fetchFilteredPhotos = async (filter) => {
 		try {
 			const response = await fetchApi(`/guests/photos?title=${filter}`, "GET");
 			setPhotos(response);
+
+			console.log("FUEST RESOPONSE", response);
 		} catch (error) {
 			console.error("Errore nella richiesta filtrata delle foto:", error);
 		}
 	};
 
-	useEffect(() => {
-		fetchFilteredPhotos(searchTerm);
-	}, [searchTerm]);
-
 	return (
-		<SearchContextGuest.Provider value={{photos, setSearchTerm}}>
+		<SearchContextGuest.Provider
+			value={{photos, setPhotos, fetchFilteredPhotos}}>
 			{children}
 		</SearchContextGuest.Provider>
 	);

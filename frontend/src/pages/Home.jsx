@@ -5,11 +5,11 @@ import PhotoCard from "../components/PhotoCard";
 import Sidebar from "../components/Sidebar";
 
 function Home() {
-	const {photos, fetchFilteredPhotos} = useSearchGuest();
+	const {photos, setPhotos, fetchFilteredPhotos} = useSearchGuest();
 
-	// useEffect(() => {
-	// 	fetchFilteredPhotos("");
-	// }, [fetchFilteredPhotos]);
+	useEffect(() => {
+		fetchFilteredPhotos("");
+	}, []);
 
 	return (
 		<>

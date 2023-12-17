@@ -8,6 +8,7 @@ import {useAuth} from "../contexts/AuthContext";
 function Dashboard() {
 	const {photos, setPhotos, fetchFilteredPhotos} = useSearch();
 	const {user} = useAuth();
+
 	useEffect(() => {
 		fetchFilteredPhotos("");
 	}, []);
