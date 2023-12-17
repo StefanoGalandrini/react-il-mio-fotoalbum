@@ -11,6 +11,7 @@ import CategoriesManage from "./pages/CategoriesManage";
 import Create from "./pages/PhotoForm";
 import PhotoForm from "./pages/PhotoForm";
 import Show from "./pages/Show";
+import GuestShow from "./pages/GuestShow";
 
 function App() {
 	return (
@@ -22,6 +23,7 @@ function App() {
 							<Route path="/" element={<DefaultLayout />}>
 								<Route index element={<Home />} />
 								<Route path="login" element={<Login />} />
+								<Route path="guest-show/:id" element={<GuestShow />} />
 
 								{/* Rotte protette */}
 								<Route element={<ProtectedRoute />}>

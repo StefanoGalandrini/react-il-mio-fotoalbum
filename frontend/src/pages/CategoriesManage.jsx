@@ -41,20 +41,22 @@ function CategoriesManage() {
 
 	return (
 		<>
-			<div className="mt-[10vh] w-screen h-screen flex flex-col justify-start items-center text-gray-800 bg-fixed bg-cover bg-center bg-[url('/background.jpg')]">
-				<h2 className="text-3xl text-center uppercase my-5">
+			<div className="mt-[10vh] w-screen h-screen flex flex-col justify-start items-center text-teal-300">
+				<h2 className="text-3xl text-center uppercase my-10">
 					Gestione Categorie
 				</h2>
 				<div className=" w-screen px-[30vw]">
 					<div className="flex gap-10">
 						{/* Elenco Categorie */}
 						<div className="w-5/12">
-							<h3 className="text-xl mb-3 font-semibold">Elenco Categorie</h3>
-							<ul className="list-disc">
+							<h3 className="text-xl mb-5 font-bold text-violet-300">
+								Elenco Categorie
+							</h3>
+							<ul className="list-disc text-gray-100">
 								{categories.map((category) => (
 									<li
 										key={category.id}
-										className="flex justify-between items-center mb-2 border-b-2 border-slate-400 pb-2">
+										className="font-light flex justify-between items-center mb-2 border-b-[1px] border-violet-300 pb-2">
 										<span className="mr-2">{category.name}</span>
 										<button
 											onClick={() => handleDeleteCategory(category.id)}
@@ -68,7 +70,9 @@ function CategoriesManage() {
 						<div className="w-2/12"></div>
 						{/* Form Aggiungi Categoria */}
 						<div className="w-5/12">
-							<h3 className="text-xl mb-3 font-semibold">Aggiungi Categoria</h3>
+							<h3 className="text-xl mb-5 font-bold text-violet-300">
+								Aggiungi Categoria
+							</h3>
 							<form
 								onSubmit={handleAddCategory}
 								className="flex flex-col gap-3">
@@ -77,11 +81,11 @@ function CategoriesManage() {
 									value={newCategoryName}
 									onChange={(e) => setNewCategoryName(e.target.value)}
 									placeholder="Nome della categoria"
-									className="border rounded py-2 px-3 focus:outline-none focus:border-blue-500"
+									className="text-gray-800 rounded py-2 px-3 border-4 border-transparent hover:border-violet-300 focus:outline-none focus:border-violet-300 focus:border-4"
 								/>
 								<button
 									type="submit"
-									className="w-fit px-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+									className="px-3 py-2 rounded-md text-gray-100 bg-teal-600 w-fit transition duration-150 hover:bg-teal-300 hover:text-gray-900">
 									Aggiungi
 								</button>
 							</form>

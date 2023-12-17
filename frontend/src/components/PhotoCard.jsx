@@ -8,11 +8,13 @@ function PhotoCard({photo, onDelete}) {
 	const {user} = useAuth();
 
 	const cardClass = user ? "admin-card" : "guest-card";
-	const handleClick = user ? () => show() : undefined;
-	const additionalClasses = user ? "cursor-pointer" : "";
 
 	function show() {
-		navigate(`/show/${photo.id}`);
+		if (user) {
+			navigate(`/show/${photo.id}`);
+		} else {
+			navigate(`/guest-show/${photo.id}`);
+		}
 	}
 
 	function handleEdit() {
@@ -63,9 +65,9 @@ function PhotoCard({photo, onDelete}) {
 			id="card-template"
 			className={`${cardClass} transition-all transform hover:scale-105 duration-200`}>
 			<div
-				onClick={handleClick}
+				onClick={show}
 				style={{"--image": `url("${imageUrl}")`}}
-				className={`card-image bg-[image:var(--image)] ${additionalClasses}`}></div>
+				className="card-image bg-[image:var(--image)] cursor-pointer"></div>
 			<div className="card-text p-4">
 				<h5 className="text-xl text-center mb-3 font-bold text-teal-300">
 					{photo.title}

@@ -157,26 +157,6 @@ function PhotoForm() {
 	/* ------------------------------ */
 	/* FUNZIONI */
 
-	// function handleChange(event) {
-	// 	const {name, value, checked, type, files} = event.target;
-	// 	if (name === "image" && files.length > 0) {
-	// 		setPhotoData({...photoData, imageFile: files[0]});
-	// 	} else if (type === "checkbox" && name === "categories") {
-	// 		setPhotoData((prev) => ({
-	// 			...prev,
-	// 			categories: {
-	// 				...prev.categories,
-	// 				[value]: checked,
-	// 			},
-	// 		}));
-	// 	} else {
-	// 		setPhotoData((prev) => ({
-	// 			...prev,
-	// 			[name]: value,
-	// 		}));
-	// 	}
-	// }
-
 	function handleChange(event) {
 		const {name, value, checked, type, files} = event.target;
 
@@ -253,7 +233,7 @@ function PhotoForm() {
 					onChange={handleChange}
 					className="mr-2"
 				/>
-				<label htmlFor={`category-${category.id}`} className="text-violet-300">
+				<label htmlFor={`category-${category.id}`} className="text-gray-100">
 					{category.name}
 				</label>
 			</div>
@@ -263,14 +243,17 @@ function PhotoForm() {
 	/* ------------------------------ */
 
 	return (
-		<div className="overlay fixed inset-0 bg-gray-700 bg-opacity-80 flex justify-center items-center">
-			<div className="bg-teal-950 p-6 rounded-lg shadow-lg border-2">
+		<div className="h-screen flex flex-col justify-center items-center">
+			<div className="container max-w-4xl bg-teal-950 p-6 rounded-lg shadow-lg border-2">
+				<h1 className="mb-10 text-center text-violet-300 font-bold text-2xl uppercase">
+					{isEditing ? "Modifica questa foto" : "Inserisci una nuova foto"}
+				</h1>
 				<form
 					onSubmit={handleFormSubmit}
 					className="flex flex-col items-center justify-center space-y-4 w-full max-w-2xl mx-auto">
 					{/* Titolo */}
 					<div className="flex justify-between items-center space-x-2 w-full">
-						<label className="text-white min-w-[7rem]" htmlFor="title">
+						<label className="text-violet-300 min-w-[7rem]" htmlFor="title">
 							Titolo:
 						</label>
 						<input
@@ -287,8 +270,10 @@ function PhotoForm() {
 					</div>
 
 					{/* Descrizione */}
-					<div className="flex justify-between items-center space-x-2 w-full">
-						<label className="text-white min-w-[7rem]" htmlFor="description">
+					<div className="pb-8 flex justify-between items-center space-x-2 w-full">
+						<label
+							className="text-violet-300 min-w-[7rem]"
+							htmlFor="description">
 							Descrizione:
 						</label>
 						<textarea
@@ -304,9 +289,9 @@ function PhotoForm() {
 					</div>
 
 					{/* Immagine */}
-					<div className="flex justify-between items-center space-x-2 w-full">
+					<div className="flex justify-between items-center w-full">
 						<div className="w-full md:w-1/2">
-							<label className="text-white min-w-[7rem]" htmlFor="image">
+							<label className="text-violet-300 min-w-[7rem]" htmlFor="image">
 								Immagine:
 							</label>
 							<input
@@ -324,13 +309,13 @@ function PhotoForm() {
 								<img
 									src={`${serverUrl}/${photoData.image.replace(/\\/g, "/")}`}
 									alt="Immagine corrente"
-									className="w-60 border-2 border-white rounded-md ml-auto"
+									className="w-full border-2 border-violet-300 rounded-md ml-auto"
 								/>
 							) : imagePreview ? (
 								<img
 									src={imagePreview}
 									alt="Anteprima immagine"
-									className="w-60 border-2 border-white rounded-md ml-auto"
+									className="w-60 border-2 border-violet-300 rounded-md ml-auto"
 								/>
 							) : null}
 						</div>
@@ -338,7 +323,7 @@ function PhotoForm() {
 
 					{/* Visibile */}
 					<div className="flex justify-start items-center space-x-2 w-full">
-						<label className="text-white min-w-[7rem]">Visibile:</label>
+						<label className="text-violet-300 min-w-[7rem]">Visibile:</label>
 						<input
 							type="checkbox"
 							name="visible"
@@ -349,7 +334,7 @@ function PhotoForm() {
 
 					{/* Categorie */}
 					<div className="py-5 flex justify-between items-center space-x-2 w-full">
-						<label className="text-white min-w-[7rem]">Categorie:</label>
+						<label className="text-violet-300 min-w-[7rem]">Categorie:</label>
 						<div className="flex flex-wrap gap-3 w-full">
 							{createCategoryCheckboxes()}
 						</div>
@@ -368,7 +353,7 @@ function PhotoForm() {
 						${
 							isEditing
 								? "bg-orange-800 text-slate-200 hover:bg-orange-600 hover:text-white cursor-pointer"
-								: "bg-purple-800 text-slate-200  hover:bg-purple-600 hover:text-white cursor-pointer"
+								: "bg-violet-600 text-slate-200  hover:bg-violet-300 hover:text-gray-800 cursor-pointer"
 						}`}>
 							{isEditing ? "Modifica" : "Aggiungi"}
 						</button>

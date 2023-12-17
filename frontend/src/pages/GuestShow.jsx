@@ -12,10 +12,9 @@ function Show() {
 	useEffect(() => {
 		axios({
 			method: "GET",
-			url: `${serverUrl}/admin/photos/${id}`,
+			url: `${serverUrl}/guests/photos/${id}`,
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
 		}).then((response) => {
 			if (response.status === 200) {
@@ -61,19 +60,6 @@ function Show() {
 							</span>
 						))}
 					</div>
-
-					<p className="mb-2 font-bold text-gray-100">Visibilità:</p>
-					<p className="mb-8 text-violet-300 font-medium italic">
-						{photo.visible ? (
-							<>
-								<i className="fa-solid fa-lock-open"></i> Pubblica
-							</>
-						) : (
-							<>
-								<i className="fa-solid fa-lock"></i> Privata
-							</>
-						)}
-					</p>
 				</div>
 			</div>
 			<div className="mt-14 flex justify-center">
