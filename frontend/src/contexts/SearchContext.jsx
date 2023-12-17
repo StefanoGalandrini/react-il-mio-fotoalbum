@@ -1,19 +1,28 @@
 import {createContext, useContext, useState} from "react";
-import fetchApi from "../utilities/fetchApi";
+import axios from "axios";
 
 const SearchContext = createContext();
+const serverUrl = "http://localhost:3000";
 
 export const SearchProvider = ({children}) => {
 	const [photos, setPhotos] = useState([]);
 
-	const fetchFilteredPhotos = async (filter) => {
-		try {
-			const response = await fetchApi(`/admin/photos?title=${filter}`, "GET");
-			setPhotos(response);
-		} catch (error) {
-			console.error("Errore nella richiesta filtrata delle foto:", error);
-		}
-	};
+	async function fetchFilteredPhotos(filter) {
+		await axios({
+			method: "GET",
+			url: `${serverUrl}/admin/photos?title=${filter}`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+			.then((response) => {
+				setPhotos(response.data);
+			})
+			.catch((error) => {
+				console.error("Errore nella richiesta filtrata delle foto:", error);
+			});
+	}
 
 	return (
 		<SearchContext.Provider value={{photos, setPhotos, fetchFilteredPhotos}}>

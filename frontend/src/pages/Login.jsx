@@ -32,32 +32,32 @@ export default function Login() {
 			</h1>
 			<form
 				onSubmit={handleSubmit}
-				className="w-4/12 bg-violet-200 shadow-md px-40 py-20 rounded-lg">
+				className="w-4/12 bg-black/70 shadow-md px-40 py-20 rounded-lg border-2 border-gray-200">
 				{error && <div className="text-red-500 text-center">{error}</div>}{" "}
 				<div className="mb-4">
 					<label
-						className="block text-gray-800 text-sm font-bold mb-2"
+						className="block text-violet-300 text-sm font-bold mb-2"
 						htmlFor="email">
 						Email
 					</label>
 					<input
 						onChange={(e) => handleInputChange(e, "email", setFormData)}
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
 						id="email"
 						type="email"
 						name="email"
-						placeholder="Enter your email"
+						placeholder="Inserisci l'email"
+						className="bg-gray-100 rounded w-full py-2 px-3 text-gray-700 border-2 border-transparent outline-none focus:border-2 focus:border-violet-500"
 					/>
 				</div>
 				<div className="mb-6">
 					<label
-						className="block text-gray-800 text-sm font-bold mb-2"
+						className="block text-violet-300 text-sm font-bold mb-2"
 						htmlFor="password">
 						Password
 					</label>
 					<input
 						onChange={(e) => handleInputChange(e, "password", setFormData)}
-						className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+						className="bg-gray-100 autofill: rounded w-full py-2 px-3 text-gray-700 border-2 border-transparent outline-none focus:border-2 focus:border-violet-500"
 						id="password"
 						type="password"
 						name="password"
@@ -66,7 +66,7 @@ export default function Login() {
 				</div>
 				<div className="flex items-center justify-center">
 					<button
-						className="mt-5 px-3 py-2 rounded-md text-gray-300 bg-violet-800 w-fit transition duration-150 hover:bg-violet-600 hover:text-white"
+						className="mt-5 px-3 py-2 rounded-md text-gray-200 bg-violet-500 w-fit transition duration-150 hover:bg-violet-300 hover:text-gray-800"
 						type="submit">
 						Login
 					</button>

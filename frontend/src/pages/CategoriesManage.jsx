@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from "react";
-import fetchApi from "../utilities/fetchApi";
+import axios from "axios";
 
 function CategoriesManage() {
 	const [categories, setCategories] = useState([]);
 	const [newCategoryName, setNewCategoryName] = useState("");
+	const serverUrl = "http://localhost:3000";
 
 	// Carica le categorie all"avvio del componente
 	useEffect(() => {
@@ -11,18 +12,36 @@ function CategoriesManage() {
 	}, []);
 
 	async function fetchCategories() {
-		try {
-			const data = await fetchApi("/admin/categories", "GET");
-			setCategories(data);
-		} catch (error) {
-			console.error("Errore nel recupero delle categorie:", error);
-		}
+		await axios({
+			method: "GET",
+			url: `${serverUrl}/admin/categories`,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
+			},
+		})
+			.then((response) => {
+				setCategories(response.data);
+			})
+			.catch((error) => {
+				console.error("Errore nella richiesta delle categorie:", error);
+			});
 	}
 
 	async function handleAddCategory(event) {
 		event.preventDefault();
 		try {
-			await fetchApi("/admin/categories", "POST", {name: newCategoryName});
+			await axios({
+				method: "POST",
+				url: `${serverUrl}/admin/categories`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+				data: {
+					name: newCategoryName,
+				},
+			});
 			setNewCategoryName("");
 			fetchCategories();
 		} catch (error) {
@@ -32,7 +51,14 @@ function CategoriesManage() {
 
 	async function handleDeleteCategory(categoryId) {
 		try {
-			await fetchApi(`/admin/categories/${categoryId}`, "DELETE");
+			await axios({
+				method: "DELETE",
+				url: `${serverUrl}/admin/categories/${categoryId}`,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
+			});
 			fetchCategories();
 		} catch (error) {
 			console.error("Errore durante l'eliminazione della categoria", error);
@@ -45,22 +71,22 @@ function CategoriesManage() {
 				<h2 className="text-3xl text-center uppercase my-10">
 					Gestione Categorie
 				</h2>
-				<div className=" w-screen px-[30vw]">
+				<div className=" w-screen px-[20vw]">
 					<div className="flex gap-10">
 						{/* Elenco Categorie */}
 						<div className="w-5/12">
 							<h3 className="text-xl mb-5 font-bold text-violet-300">
-								Elenco Categorie
+								Elenco categorie:
 							</h3>
-							<ul className="list-disc text-gray-100">
+							<ul className="list-disc text-gray-100 grid grid-cols-2 gap-x-16">
 								{categories.map((category) => (
 									<li
 										key={category.id}
-										className="font-light flex justify-between items-center mb-2 border-b-[1px] border-violet-300 pb-2">
+										className="text-sm flex justify-between items-center mb-2 border-b-[1px] border-violet-300 pb-2">
 										<span className="mr-2">{category.name}</span>
 										<button
 											onClick={() => handleDeleteCategory(category.id)}
-											className="bg-red-700 text-slate-200 px-2 py-1 rounded-md hover:bg-red-800 transition">
+											className="text-sm bg-red-700 text-slate-200 px-2 py-1 rounded-md hover:bg-red-800 transition">
 											<i className="fa-solid fa-trash-can"></i>
 										</button>
 									</li>

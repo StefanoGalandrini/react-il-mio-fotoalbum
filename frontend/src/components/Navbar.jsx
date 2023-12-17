@@ -44,23 +44,28 @@ function Navbar() {
 			<nav className="py-0">
 				<div className=" w-[90%] mx-auto h-[10vh] flex items-center justify-between">
 					<div className="flex flex-col items-center">
-						<p className="font-bold text-teal-300 uppercase text-lg">
-							obiettivo
-						</p>
-						<img
-							src="/logo-ok.png"
-							alt="Blog Logo"
-							className="w-[1.7rem] h-[1.7rem] bg-center bg-cover rounded-full"
-						/>
-						<p className="uppercase font-bold text-teal-300 text-lg">sfocato</p>
+						<div className="flex gap-1 items-center">
+							<p className="font-bold text-teal-300 uppercase text-xl">
+								obiettivo
+							</p>
+							<img
+								src="/logo-ok.png"
+								alt="Blog Logo"
+								className="w-[2rem] h-[2rem] bg-center bg-cover rounded-full"
+							/>
+							<p className="uppercase font-bold text-teal-300 text-xl">
+								sfocato
+							</p>
+						</div>
+						<div className="mt-2">
+							<p className="text-md text-teal-700 font-bold">
+								La perfezione è sopravvalutata
+							</p>
+						</div>
 					</div>
-
 					<div className="flex flex-col items-center">
 						<p className="text-3xl text-violet-300 uppercase font-bold pl-10">
 							Studio fotografico
-						</p>
-						<p className="text-lg text-violet-500 font-bold pl-10">
-							«La perfezione è sopravvalutata»
 						</p>
 					</div>
 
@@ -85,7 +90,7 @@ function Navbar() {
 									/>
 									<button
 										type="submit"
-										className="ml-2 rounded-md text-white bg-teal-600 px-3 py-2 transition delay-150 hover:bg-teal-300 hover:text-stone-700">
+										className="ml-2 rounded-md text-white bg-teal-600 px-3 py-2 transition duration-150 hover:bg-teal-300 hover:text-stone-700">
 										Cerca
 									</button>
 								</form>

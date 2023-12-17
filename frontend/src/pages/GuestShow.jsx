@@ -27,12 +27,12 @@ function Show() {
 	}
 
 	return (
-		<div className="h-full w-[85vw] mx-auto mt-[10vh] flex flex-col justify-start items-center text-gray-800">
+		<div className="h-full w-[70vw] mx-auto mt-[10vh] flex flex-col justify-start items-center text-gray-800">
 			<h1 className="text-4xl mt-5 font-bold text-teal-300 text-center mb-14">
 				{photo.title}
 			</h1>
 			<div className="flex flex-wrap text-lg">
-				<div className="w-full md:w-6/12">
+				<div className="w-full md:w-7/12">
 					<img
 						className="rounded-md border-2 border-violet-300 w-2xl transition duration-200 hover:scale-105"
 						src={
@@ -44,13 +44,13 @@ function Show() {
 					/>
 				</div>
 				<div className="w-full md:w-1/12"></div>
-				<div className="w-full md:w-5/12 md:pl-4">
-					<p className="mb-2 font-bold text-gray-100">Descrizione:</p>
-					<p className="mb-8 text-violet-300 font-medium italic">
+				<div className="w-full md:w-4/12">
+					<p className="mb-2 font-bold text-teal-300">Descrizione:</p>
+					<p className="mb-8 text-gray-100 font-medium italic">
 						{photo.description}
 					</p>
 
-					<p className="mb-2 font-bold text-gray-100">Categorie:</p>
+					<p className="mb-2 font-bold text-teal-300">Categorie:</p>
 					<div className="mb-8 flex flex-wrap">
 						{photo.categories?.map((category, index) => (
 							<span

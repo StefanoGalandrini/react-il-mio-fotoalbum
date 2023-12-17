@@ -1,8 +1,9 @@
 import {createContext, useContext, useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import fetchApi from "../utilities/fetchApi";
+import axios from "axios";
 
 const AuthContext = createContext();
+const serverUrl = "http://localhost:3000";
 
 export function AuthProvider({children}) {
 	const [user, setUser] = useState(null);
@@ -40,21 +41,26 @@ export function AuthProvider({children}) {
 			handleLogout();
 			return;
 		}
-		try {
-			const response = await fetchApi("/verify-token", "POST", {
+		await axios({
+			method: "POST",
+			url: `${serverUrl}/verify-token`,
+			data: {
 				token: storedToken,
-			});
-			if (response.user) {
-				setUser(response.user);
-				setIsLogged(true);
-				navigate("/dashboard");
-			} else {
+			},
+		})
+			.then((response) => {
+				if (response.data.user) {
+					setUser(response.data.user);
+					setIsLogged(true);
+					navigate("/dashboard");
+				} else {
+					handleLogout();
+				}
+			})
+			.catch((error) => {
+				console.error("Errore nella verifica del token:", error);
 				handleLogout();
-			}
-		} catch (error) {
-			console.error("Errore nella verifica del token:", error);
-			handleLogout();
-		}
+			});
 	}
 
 	async function initializeData() {

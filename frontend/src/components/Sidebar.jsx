@@ -1,7 +1,9 @@
 import {useState} from "react";
 import {NavLink} from "react-router-dom";
 import {useAuth} from "../contexts/AuthContext";
-import fetchApi from "../utilities/fetchApi";
+import axios from "axios";
+
+const serverUrl = "http://localhost:3000";
 
 function Sidebar() {
 	const {user} = useAuth();
@@ -15,9 +17,9 @@ function Sidebar() {
 	}
 
 	async function handleSubmit(event) {
-		event.preventDefault();
 		try {
-			const response = await fetchApi("/messages", "POST", formData);
+			event.preventDefault();
+			await axios.post(`${serverUrl}/messages`, formData);
 			setFormData({email: "", message: ""});
 			setFeedback("Il messaggio è stato inviato con successo");
 			setIsSuccess(true);
@@ -38,7 +40,7 @@ function Sidebar() {
 	}
 
 	return (
-		<div className="fixed top-[10vh] h-screen right-0 w-[12vw] bg-white/20 p-4 text-violet-300">
+		<div className="fixed top-[10vh] h-screen right-0 w-[12vw] bg-white/30 p-4 text-violet-300">
 			{user && user.role === "admin" ? (
 				// Menu per Admin
 				<div className="flex flex-col">
@@ -56,11 +58,13 @@ function Sidebar() {
 			) : (
 				// Form per Messaggi
 				<div className="flex flex-col gap-2">
-					<p className="font-bold text-lg text-center mb-4">
+					<p className="font-bold text-lg text-center my-4 text-white">
 						Invia un Messaggio
 					</p>
 					<form onSubmit={handleSubmit} className="flex flex-col gap-2">
-						<label htmlFor="email">Email</label>
+						<label htmlFor="email" className="text-violet-300">
+							Email
+						</label>
 						<input
 							type="email"
 							id="email"
@@ -68,9 +72,9 @@ function Sidebar() {
 							value={formData.email}
 							onChange={handleInputChange}
 							placeholder="La tua email"
-							className="w-full p-2 text-gray-700"
+							className="w-full p-2 text-gray-700 rounded-md"
 						/>
-						<label htmlFor="message" className="mt-4">
+						<label htmlFor="message" className="mt-4 text-violet-300">
 							Messaggio
 						</label>
 						<textarea
@@ -79,7 +83,7 @@ function Sidebar() {
 							value={formData.message}
 							onChange={handleInputChange}
 							placeholder="Il tuo messaggio"
-							className="mb-2 w-full p-2 h-28 text-gray-700"></textarea>
+							className="mb-2 w-full p-2 h-28 text-gray-700 rounded-md"></textarea>
 						<div className="flex justify-center">
 							<button
 								type="submit"
