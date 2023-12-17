@@ -75,7 +75,7 @@ async function create(req, res, next)
 				description,
 				visible: visible === 'true',
 				image: imagePath,
-				userId: userNumber,
+				userId: userNumber ? userNumber : 1,
 				categories: {
 					connect: categories.map(categoryId => ({ id: parseInt(categoryId) })),
 				},
