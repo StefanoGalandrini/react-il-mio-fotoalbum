@@ -49,7 +49,7 @@ body {
 #card-template.admin-card {
 	display: grid;
 	grid-template-columns: 500px;
-	grid-template-rows: 350px 70px 80px;
+	grid-template-rows: 350px 50px 80px;
 	grid-template-areas: "image" "text" "buttons";
 	border-radius: 18px;
 	background-color: #202020;
