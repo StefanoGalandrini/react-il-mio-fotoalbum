@@ -1,92 +1,74 @@
 [
 	{
 		"id": 1,
-		"title": "Spiaggia e fiume",
-		"description": "Una spiaggia attraversata da un fiume che sfocia nel mare",
-		"image": "/images/01.jpg",
+		"title": "Concerto U2 360°",
+		"description": "Il fantascientifico palco del 360° Tour degli U2, uno spettacolo nello spettacolo per un'esperienza unica di musica live.",
+		"image": "01-u2.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 1}, {"id": 3}]
+		"categories": [{"id": 4}, {"id": 5}, {"id": 9}, {"id": 10}]
 	},
 	{
 		"id": 2,
-		"title": "Spiaggia al mattino",
-		"description": "Una splendida spiaggia bianca con alberi e mare cristallino",
-		"image": "/images/02.jpg",
-		"visible": true,
-		"userId": 1,
-		"categories": [{"id": 1}, {"id": 3}]
-	},
-	{
-		"id": 3,
-		"title": "Strada di campagna",
-		"description": "Una strada nel verde della campagna con alberi sullo sfondo",
-		"image": "/images/03.jpg",
+		"title": "Sogno tropicale",
+		"description": "Spiaggia di corallo bianche come neve e mare di cristallo, un luogo unico al modo da visitare almenouna volta nella vita.",
+		"image": "02-maldive.jpg",
 		"visible": true,
 		"userId": 1,
 		"categories": [{"id": 1}, {"id": 3}, {"id": 7}]
 	},
 	{
-		"id": 4,
-		"title": "Montagne innevate",
-		"description": "Rocce e cime innevate con cielo azzurro e nuvole bianche",
-		"image": "/images/04.jpg",
+		"id": 3,
+		"title": "Persona dell'Anno 2023",
+		"description": "Secondo Time Magazine è Taylor Swift, per aver costruito un mondo tutto suo che ha creato uno spazio per molti, per aver portato gioia in una società che ne aveva disperatamente bisogno.",
+		"image": "03-taylor.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 1}, {"id": 3}]
+		"categories": [{"id": 5}, {"id": 9}, {"id": 10}]
+	},
+	{
+		"id": 4,
+		"title": "Nulla è paragonabile a te",
+		"description": "Sinéad O'Connor, una voce unica fatta di rabbia, dolore, incomprensione e solitudine, ci ha lasciati. Resta la sua musica, testimonianza di una donna che non si è mai arresa e che ha sempre scelto la verità invece della fama.",
+		"image": "04-sinead.jpg",
+		"visible": true,
+		"userId": 1,
+		"categories": [{"id": 2}, {"id": 5}, {"id": 6}, {"id": 9}, {"id": 10}]
 	},
 	{
 		"id": 5,
-		"title": "Bar ristorante",
-		"description": "tavoli di un bar ristorante con tazzine di caffè e persone sullo sfondo",
-		"image": "/images/05.jpg",
+		"title": "La piaga del presente",
+		"description": "Mentre si pensa a colonizzare Marte, sempre più persone nei Paesi ricchi perdono il lavoro e si ritrovano senza nulla, compresa la loro dignità.",
+		"image": "05-disoccupazione.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 2}, {"id": 8}]
+		"categories": [{"id": 6}, {"id": 9}, {"id": 10}]
 	},
 	{
 		"id": 6,
-		"title": "Case di paese",
-		"description": "Case bianche tipiche di un piccolo paese della Grecia",
-		"image": "/images/06.jpg",
+		"title": "Senza giusificazioni",
+		"description": "La guerra in Ucraina è priva di qualsiasi ragione: un Paese distrutto insieme alla vita di persone innocenti e con gravissime conseguenze in tutto il mondo.",
+		"image": "06-ucraina.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 1}, {"id": 4}, {"id": 7}]
+		"categories": [{"id": 2}, {"id": 5}, {"id": 6}, {"id": 9}]
 	},
 	{
 		"id": 7,
-		"title": "Ponte sospeso",
-		"description": "Immagine notturna di un ponte moderno sorretto da funi e pilastri",
-		"image": "/images/07.jpg",
+		"title": "La paura della diversità",
+		"description": "L'immagine di copertina di «One» degli U2, riprendendo il modo in cui gli indiani cacciavano i bufali, rappresenta la paura della diversità, che porta a fuggire da ciò che non si capisce senza sapere cosa c'è alla fine della strada.",
+		"image": "07-one.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 4}, {"id": 7}]
+		"categories": [{"id": 2}, {"id": 5}, {"id": 6}, {"id": 9}]
 	},
 	{
 		"id": 8,
-		"title": "Colazione al bar",
-		"description": "Tazza di cappuccino con decorazione di panna e cacao",
-		"image": "/images/08.jpg",
+		"title": "Memorie di un lockdown",
+		"description": "Città deserte, strade vuote, isolamento sociale... il Covid-19 ha cambiato il mondo e la vita di tutti noi. Ce ne siamo già dimenticati?",
+		"image": "08-roma.jpg",
 		"visible": true,
 		"userId": 1,
-		"categories": [{"id": 2}, {"id": 8}]
-	},
-	{
-		"id": 9,
-		"title": "Persona sola",
-		"description": "Una donna con cappuccio sulla testa cammina sulla riva del mare in una giornata fredda e piovosa",
-		"image": "/images/09.jpg",
-		"visible": true,
-		"userId": 1,
-		"categories": [{"id": 2}, {"id": 3}, {"id": 7}]
-	},
-	{
-		"id": 10,
-		"title": "Pale a vento",
-		"description": "Una strada nel deserto e pale a vento sullo sfondo",
-		"image": "/images/10.jpg",
-		"visible": true,
-		"userId": 1,
-		"categories": [{"id": 1}, {"id": 4}]
+		"categories": [{"id": 5}, {"id": 9}]
 	}
 ]

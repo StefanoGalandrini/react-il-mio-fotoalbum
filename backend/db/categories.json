@@ -21,7 +21,7 @@
 	},
 	{
 		"id": 6,
-		"name": "Sport"
+		"name": "Attualità"
 	},
 	{
 		"id": 7,
@@ -30,5 +30,13 @@
 	{
 		"id": 8,
 		"name": "Cibo"
+	},
+	{
+		"id": 9,
+		"name": "Cultura"
+	},
+	{
+		"id": 10,
+		"name": "Persone"
 	}
 ]
