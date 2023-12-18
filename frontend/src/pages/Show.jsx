@@ -49,7 +49,7 @@ function Show() {
 			<div className="w-full flex flex-wrap text-lg">
 				<div className="w-full md:w-7/12">
 					<img
-						className="w-full rounded-md border-2 border-violet-300 w-2xl transition duration-200 hover:scale-105"
+						className="max-w-full w-10/12 rounded-md border-2 border-violet-300 w-2xl transition duration-200 hover:scale-105"
 						src={
 							photo.image
 								? `${serverUrl}/${photo.image.replace(/\\/g, "/")}`
