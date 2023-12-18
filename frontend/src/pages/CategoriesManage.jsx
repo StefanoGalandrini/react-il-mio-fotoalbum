@@ -6,7 +6,7 @@ function CategoriesManage() {
 	const [newCategoryName, setNewCategoryName] = useState("");
 	const serverUrl = "http://localhost:3000";
 
-	// Carica le categorie all"avvio del componente
+	// Carica le categorie all'avvio del componente
 	useEffect(() => {
 		fetchCategories();
 	}, []);

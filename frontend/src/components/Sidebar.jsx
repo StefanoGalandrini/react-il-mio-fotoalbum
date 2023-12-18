@@ -47,11 +47,20 @@ function Sidebar() {
 					<p className="font-bold text-xl text-center text-white my-10 uppercase underline underline-offset-4">
 						&nbsp;&nbsp;Categorie&nbsp;&nbsp;
 					</p>
-					<div id="sidebar" className="bg-stone-400 rounded-lg text-violet-800">
+					<div
+						id="sidebar"
+						className="mb-8 bg-stone-400 rounded-lg text-violet-800">
 						<NavbarLink
 							href="/categories-manage"
 							className="block mb-2 text-left font-bold">
-							Visualizza, aggiungi o rimuovi le categorie delle foto
+							Gestisci le Categorie
+						</NavbarLink>
+					</div>
+					<div id="sidebar" className="bg-stone-400 rounded-lg text-violet-800">
+						<NavbarLink
+							href="/messages-manage"
+							className="block mb-2 text-left font-bold">
+							Gestisci i<br></br>Messaggi
 						</NavbarLink>
 					</div>
 				</div>

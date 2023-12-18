@@ -41,6 +41,7 @@ app.use("/admin/auth", require("./routers/admin/authRouter"));
 app.use("/guests/photos", require("./routers/guests/photosRouter"));
 app.use("/", require("./routers/authRouter"));
 app.use("/messages", require("./routers/guests/messagesRouter"));
+app.use("/admin/messages", require("./routers/admin/messagesRouter"));
 
 
 // import middleware

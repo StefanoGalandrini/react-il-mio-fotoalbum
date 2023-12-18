@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CategoriesManage from "./pages/CategoriesManage";
+import MessagesManage from "./pages/MessagesManage";
 import Create from "./pages/PhotoForm";
 import PhotoForm from "./pages/PhotoForm";
 import Show from "./pages/Show";
@@ -32,6 +33,7 @@ function App() {
 										path="categories-manage"
 										element={<CategoriesManage />}
 									/>
+									<Route path="messages-manage" element={<MessagesManage />} />
 									<Route path="create" element={<Create />} />
 									<Route path="add-photo" element={<PhotoForm />} />
 									<Route path="show/:id" element={<Show />} />
