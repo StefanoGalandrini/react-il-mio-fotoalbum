@@ -9,7 +9,7 @@
 body {
 	/* font-family: "Work Sans", sans-serif; */
 	font-family: "Comfortaa", sans-serif;
-	background-image: url("/background-dark.jpg");
+	background-image: url("/background-dark-ok.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -41,7 +41,7 @@ body {
 	background-repeat: no-repeat;
 	box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.3);
 	text-align: center;
-	border: 2px solid black;
+	border: 2px solid #707070;
 	border-radius: 15px;
 	overflow: hidden;
 }
@@ -52,11 +52,11 @@ body {
 	grid-template-rows: 350px 70px 80px;
 	grid-template-areas: "image" "text" "buttons";
 	border-radius: 18px;
-	background-color: #101010;
+	background-color: #202020;
 	background-repeat: no-repeat;
 	box-shadow: 3px 5px 10px rgba(255, 255, 255, 0.3);
 	text-align: center;
-	border: 2px solid black;
+	border: 2px solid #707070;
 	border-radius: 15px;
 	overflow: hidden;
 }

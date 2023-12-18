@@ -38,7 +38,7 @@ export default function Login() {
 			</h1>
 			<form
 				onSubmit={handleSubmit}
-				className="w-4/12 bg-black/70 shadow-md px-40 py-20 rounded-lg border-2 border-gray-200">
+				className="w-4/12 bg-teal-950/50 shadow-md px-40 py-20 rounded-lg border-2 border-gray-200">
 				{error && <div className="text-red-500 text-center">{error}</div>}{" "}
 				<div className="mb-4">
 					<label

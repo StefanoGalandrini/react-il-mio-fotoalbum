@@ -64,7 +64,7 @@ function Show() {
 			</div>
 			<div className="mt-14 flex justify-center">
 				<Link
-					to="/dashboard"
+					to="/"
 					className="px-3 py-2 rounded-md text-gray-100 bg-teal-600 w-fit transition duration-150 hover:bg-teal-300 hover:text-gray-900">
 					Torna alla vista delle Foto
 				</Link>

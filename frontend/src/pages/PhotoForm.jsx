@@ -250,7 +250,7 @@ function PhotoForm() {
 
 	return (
 		<div className="h-screen flex flex-col justify-center items-center">
-			<div className="container max-w-4xl bg-teal-950 p-6 rounded-lg shadow-lg border-2">
+			<div className="container max-w-4xl bg-teal-950/50 p-6 rounded-lg shadow-lg border-2">
 				<h1 className="mb-10 text-center text-violet-300 font-bold text-2xl uppercase">
 					{isEditing ? "Modifica questa foto" : "Inserisci una nuova foto"}
 				</h1>
@@ -336,6 +336,11 @@ function PhotoForm() {
 							checked={photoData.visible}
 							onChange={handleChange}
 						/>
+						{photoData.visible ? (
+							<span className="text-violet-300 text-sm">(foto pubblica)</span>
+						) : (
+							<span className="text-violet-300 text-sm">(foto privata)</span>
+						)}
 					</div>
 
 					{/* Categorie */}

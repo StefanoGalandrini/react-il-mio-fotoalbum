@@ -8,7 +8,7 @@ function NavbarLink({href, children}) {
 	return (
 		<NavLink
 			to={href}
-			className="block py-3 px-4 min-w-[80px] text-center rounded-md transition-all duration-300 hover:bg-gray-300 hover:text-primary">
+			className="block py-2 px-3 min-w-[80px] text-center rounded-md transition-all duration-300 hover:bg-gray-300 hover:text-primary">
 			{children}
 		</NavLink>
 	);
@@ -64,13 +64,13 @@ function Navbar() {
 						</div>
 					</div>
 					<div className="flex flex-col items-center">
-						<p className="text-3xl text-violet-300 uppercase font-bold pl-10">
+						<p className="text-5xl text-violet-300 uppercase font-bold pl-10">
 							Studio fotografico
 						</p>
 					</div>
 
 					<div id="navbar">
-						<ul className="flex gap-3 text-teal-300">
+						<ul className="flex gap-3 text-sm font-bold text-teal-300">
 							<li>
 								{isLogged ? (
 									<NavbarLink href="/dashboard">Dashboard</NavbarLink>
@@ -86,11 +86,11 @@ function Navbar() {
 										placeholder="Cerca per titolo..."
 										value={search}
 										onChange={handleSearchChange}
-										className="text-gray-800 rounded py-1 px-2 border-4 border-transparent hover:border-teal-300 focus:outline-none focus:border-teal-300 focus:border-4"
+										className="text-gray-800 rounded py-1 px-2 border-2 border-transparent hover:border-teal-300 focus:outline-none focus:border-teal-300 focus:border-2"
 									/>
 									<button
 										type="submit"
-										className="ml-2 rounded-md text-white bg-teal-600 px-3 py-2 transition duration-150 hover:bg-teal-300 hover:text-stone-700">
+										className="ml-2 rounded-md text-white bg-teal-600 px-3 py-1.5 transition duration-150 hover:bg-teal-300 hover:text-stone-700">
 										Cerca
 									</button>
 								</form>
